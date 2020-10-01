@@ -2,11 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Frontend/VIAProMa/Assets/SteamVR
-/Frontend/VIAProMa/Assets/Photon
-/Frontend/VIAProMa/Assets/GoogleARCore
-/Frontend/VIAProMa/Assets/PlayServicesResolver
-/Frontend/VIAProMa/UWP
-/Frontend/VIAProMa/Win
-/Frontend/VIAProMa/App
-/Frontend/VIAProMa/VR
+/Frontend/LearningPlanVisualization/Assets/SteamVR
+/Frontend/LearningPlanVisualization/Assets/Photon
+/Frontend/LearningPlanVisualization/Assets/GoogleARCore
+/Frontend/LearningPlanVisualization/Assets/PlayServicesResolver
+/Frontend/LearningPlanVisualization/UWP
+/Frontend/LearningPlanVisualization/Win
+/Frontend/LearningPlanVisualization/App
+/Frontend/LearningPlanVisualization/VR
