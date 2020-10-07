@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class LTConnection : MonoBehaviour
 {
-    public Vector3 start;
-    public Vector3 end;
+    public LTNode start;
+    public LTNode end;
+    private Vector3 startPosition;
+    private Vector3 endPosition;
+
     // Start is called before the first frame update
-    void Start()
+    public void Create(LTNode newStart, LTNode newEnd)
     {
-        if (start == end)
+        start = newStart;
+        end = newEnd;
+    }
+
+
+    void Update()
+    {
+        if (start.GetComponent<Visibility>().Visible && end.GetComponent<Visibility>().Visible)
         {
-            this.enabled = false;
+            startPosition = start.transform.position;
+            endPosition = end.transform.position;
+
+            transform.localScale = new Vector3(1, Vector3.Magnitude(endPosition - startPosition), 1);
+            transform.up = endPosition - startPosition;
+            transform.position = (endPosition + startPosition) * 0.5f;
         }
         else
         {
-            transform.localScale = new Vector3(1, Vector3.Magnitude(end - start), 1);
-            transform.up = end - start;
-            transform.position = (end + start)*0.5f;
+            transform.localScale = new Vector3(0, 0, 0);
         }
-
     }
 
 }
