@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 789144841032861975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 5846638470747389261}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1af0b053c64b79447870f36fab0bc5f8, type: 2}
+  - {fileID: 2100000, guid: b957742c5b9bfd441b9b330c8b55d0c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5846638470747389261}
-  - component: {fileID: 8297443387611521448}
   - component: {fileID: 412651711456060046}
   - component: {fileID: 114275176861824280}
   - component: {fileID: 114251018975357298}
@@ -128,24 +127,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8297443387611521448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4624808711361905208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25a6011921f157343a5b3851f5abdd91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  title: 
-  requirements: []
-  done: 0
-  resources: []
-  evidence: 
 --- !u!114 &412651711456060046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetRenderers:
   - {fileID: 4418496122714753779}
-  focusColor: {r: 0, g: 0, b: 0, a: 0.4745098}
+  focusColor: {r: 0.19215688, g: 0.19215688, b: 0.19215688, a: 0.76862746}
 --- !u!1001 &5093190550490228454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 5201877702419202523, guid: 5081d1d2b3485b84c87d66edd352ed3a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5201877702419202523, guid: 5081d1d2b3485b84c87d66edd352ed3a,
         type: 3}

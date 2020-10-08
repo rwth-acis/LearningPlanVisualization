@@ -26,7 +26,10 @@ public class Visibility : MonoBehaviour
             requirementsVisible = value;
             foreach (var requirement in GetComponent<LTNode>().requirements)
             {
-                requirement.GetComponent<Visibility>().Visible = value;
+                if (requirement.GetType() == typeof(LTAction))
+                {
+                    requirement.GetComponent<Visibility>().Visible = value;
+                }
             }
         }
         

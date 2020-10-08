@@ -1,24 +1,40 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
-public enum LTType { Goal, Subgoal, Action }
-public class LTNode : MonoBehaviour
+public enum LTStatus { Done, Available, NotAvailable }
+
+abstract public class LTNode : MonoBehaviour
 {
-    public LTType type = LTType.Goal;
     public string title;
     public List<LTNode> requirements;
-    public bool done = false;
-    [Header("Action")]
-    public List<string> resources;
-    public string evidence;
-    public TimeSpan time = TimeSpan.Zero;
+    public LTStatus status { get; protected set; }
 
-    public void Create(LTType newType, string newTitle)
+    public void Create(string newtitle)
     {
-        type = newType;
-        title = newTitle;
+        title = newtitle;
+
+    }
+    public List<LTAction> GetAllRequirements()
+    {
+        List<LTAction> returnList = new List<LTAction>();
+        List<LTAction> candidates;
+        if (requirements.Count == 0) return returnList;
+        foreach(var requirement in requirements)
+        {
+            if (requirement.GetType() == typeof(LTAction))
+            {
+                candidates = requirement.GetAllRequirements();
+                foreach(var candidate in candidates)
+                {
+                    if (!returnList.Contains(candidate)) returnList.Add(candidate);
+                }
+                if (!returnList.Contains(requirement)) returnList.Add(requirement as LTAction);
+            }
+        }
+        return returnList;
     }
 }

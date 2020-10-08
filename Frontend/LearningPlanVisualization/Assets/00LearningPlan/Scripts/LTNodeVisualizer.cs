@@ -32,22 +32,18 @@ public class LTNodeVisualizer : MonoBehaviour
 
     public void MaterialUpdate()
     {
-        if (node.done)
+        switch (node.status)
         {
-            meshRenderer.material = materialDone;
+            case LTStatus.Done:
+                    meshRenderer.material = materialDone;
+                break;
+            case LTStatus.Available:
+                meshRenderer.material = materialAvailable;
+                break;
+            case LTStatus.NotAvailable:
+                meshRenderer.material = materialNotAvailable;
+                break;
         }
-        else
-        {
-            foreach (var requirement in node.requirements)
-            {
-                if (!requirement.done)
-                {
-                    meshRenderer.material = materialNotAvailable;
-                    return;
-                }
-            }
-            meshRenderer.material = materialAvailable;
-        }
-        
     }
 }
+

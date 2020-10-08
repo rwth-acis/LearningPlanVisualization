@@ -471,11 +471,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffeb818e83d827645a7703c28b9dea0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabLTNode: {fileID: 4624808711361905208, guid: 4cae22e38057ee747b22bcc85df8cdea,
+  prefabLTGoal: {fileID: 8231514368295661385, guid: 21283240418dab34cae67b370ba51dbd,
+    type: 3}
+  prefabLTSubgoal: {fileID: 7210743423269202964, guid: 3988eadd8b41a264387fdced33aabc33,
+    type: 3}
+  prefabLTAction: {fileID: 197813528284855482, guid: 90b187cf10cffee4283ee25e6c7c12f4,
     type: 3}
   prefabLTConnection: {fileID: 3940317451429139093, guid: 849e985cdc70d0d40a3af81b12683984,
     type: 3}
-  goal: {fileID: 0}
 --- !u!4 &2137585455
 Transform:
   m_ObjectHideFlags: 0

@@ -51,6 +51,8 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
         {
             targetRenderers[i].material.color = defaultColors[i];
         }
+
+        GetComponent<LTNodeVisualizer>().MaterialUpdate();
     }
 
     /// <summary>
