@@ -12,12 +12,33 @@ abstract public class LTNode : MonoBehaviour
     public string title;
     public List<LTNode> requirements;
     public LTStatus status { get; protected set; }
+    public int level;
 
     public void Create(string newtitle)
     {
         title = newtitle;
 
     }
+
+    public void ResetLevel()
+    {
+        level = 0;
+        foreach (var requirement in requirements)
+        {
+            requirement.ResetLevel();
+        }
+    }
+    public void CalculateLevel(int lastLevel)
+    {
+        if (level <= lastLevel) level = lastLevel + 1;
+        foreach(var requirement in requirements)
+        {
+            requirement.CalculateLevel(level);
+        }
+    }
+
+    abstract public void RepositionRequirements(float margin);
+
     public List<LTAction> GetAllRequirements()
     {
         List<LTAction> returnList = new List<LTAction>();

@@ -111,7 +111,6 @@ public class Factory : MonoBehaviour
             {
                 foreach (var endnode in startnode.requirements)
                 {
-                    print(startnode.title + "(" + startnode.transform.position.ToString() + ") ->" + endnode.title + "(" + endnode.transform.position.ToString() + ")");
                     var connection = Instantiate(prefabLTConnection, new Vector3(0, 0, 0), Quaternion.identity);
                     connection.GetComponent<LTConnection>().Create(startnode, endnode);
                 }
@@ -137,6 +136,12 @@ public class Factory : MonoBehaviour
             var mesh = goal.GetComponentInChildren<MeshFilter>();
             mesh.mesh = newMesh;
         }
-
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            var goal = FindObjectOfType<LTGoal>();
+            goal.ResetLevel();
+            goal.CalculateLevel(-1);
+            goal.RepositionRequirements(1.5f);
+        }
     }
 }

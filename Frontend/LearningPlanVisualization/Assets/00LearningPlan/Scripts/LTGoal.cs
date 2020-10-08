@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class LTGoal : LTNode
 {
+    public override void RepositionRequirements(float margin)
+    {
+        var offset = requirements.Count-1f;
+        var i = 0;
+        foreach (var requirement in requirements)
+        {
+            requirement.transform.position = transform.position + new Vector3((-offset+2*i)*margin,0,-margin);
+            requirement.RepositionRequirements(margin);
+            i++;
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
