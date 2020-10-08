@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.i5.versiontool": "https://github.com/rwth-acis/Unity-VersionTool.git#upm",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.2.3",
     "com.unity.collab-proxy": "1.2.15",
@@ -39,5 +40,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.i5.versiontool": {
+      "revision": "upm",
+      "hash": "b60681c876fb7ca54044f5c6d7f354eb5b34e506"
+    }
   }
 }

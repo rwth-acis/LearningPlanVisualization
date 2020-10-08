@@ -477,6 +477,7 @@ MonoBehaviour:
     type: 3}
   prefabLTAction: {fileID: 197813528284855482, guid: 90b187cf10cffee4283ee25e6c7c12f4,
     type: 3}
+  newMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   prefabLTConnection: {fileID: 3940317451429139093, guid: 849e985cdc70d0d40a3af81b12683984,
     type: 3}
 --- !u!4 &2137585455
