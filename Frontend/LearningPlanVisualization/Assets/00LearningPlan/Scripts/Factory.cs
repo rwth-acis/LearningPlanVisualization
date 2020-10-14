@@ -118,14 +118,19 @@ public class Factory : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            var lTSubgoals = FindObjectsOfType(typeof(LTSubgoal)) as LTSubgoal[];
-            foreach(var subgoal in lTSubgoals)
+            var lTActions = FindObjectsOfType(typeof(LTAction)) as LTAction[];
+            foreach (var node in lTActions)
             {
-                subgoal.UpdateActions();
+                node.GetComponent<LTNodeVisualizer>().MaterialUpdate();
             }
-
-            var lTNodes = FindObjectsOfType(typeof(LTNode)) as LTNode[];
-            foreach (var node in lTNodes)
+            var lTSubgoals = FindObjectsOfType(typeof(LTSubgoal)) as LTSubgoal[];
+            foreach (var node in lTSubgoals)
+            {
+                node.UpdateActions();
+                node.GetComponent<LTNodeVisualizer>().MaterialUpdate();
+            }
+            var lTGoals = FindObjectsOfType(typeof(LTGoal)) as LTGoal[];
+            foreach (var node in lTGoals)
             {
                 node.GetComponent<LTNodeVisualizer>().MaterialUpdate();
             }

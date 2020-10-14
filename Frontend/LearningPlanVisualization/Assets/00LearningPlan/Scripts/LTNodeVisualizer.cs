@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LTNodeVisualizer : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class LTNodeVisualizer : MonoBehaviour
         materialNotAvailable = Resources.Load<Material>("Materials/NodeNotAvailable");
         meshRenderer = GetComponentInChildren<MeshRenderer>();
 
-        var text = GetComponentInChildren<Text>();
+        var text = GetComponentInChildren<TextMeshPro>();
         text.text = node.title;
     }
 

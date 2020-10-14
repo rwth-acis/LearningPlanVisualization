@@ -23,7 +23,6 @@ public class LTNodeInputhandler : MonoBehaviour, IMixedRealityPointerHandler
         if (node.GetType() == typeof(LTAction)){
 
         }
-
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)

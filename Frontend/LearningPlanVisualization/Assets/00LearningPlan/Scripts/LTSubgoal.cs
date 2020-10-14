@@ -51,19 +51,26 @@ public class LTSubgoal : LTNode
             if (action.done) doneActions++;
             else neededActions++;
         }
+    }
 
-        if (neededActions == 0) status = LTStatus.Done;
-        else
+    void Update()
+    {
+        var notDone = false;
+        foreach (var node in requirements)
         {
-            foreach (var node in requirements)
+            if (!(node.status == LTStatus.Done))
             {
-                if (node.GetType() == typeof(LTSubgoal) && !(node.status == LTStatus.Done))
+                if(node.GetType() == typeof(LTSubgoal))
                 {
                     status = LTStatus.NotAvailable;
                     return;
+                }else if(node.GetType() == typeof(LTAction))
+                {
+                    notDone = true;
                 }
             }
-            status = LTStatus.Available;
         }
+        if (notDone) status = LTStatus.Available;
+        else status = LTStatus.Done;
     }
 }

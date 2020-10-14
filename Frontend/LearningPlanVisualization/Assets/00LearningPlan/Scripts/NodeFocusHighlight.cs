@@ -12,9 +12,9 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
     [SerializeField] private Renderer[] targetRenderers;
 
     /// <summary>
-    /// The color which the renderers should have if they are focused
+    /// The factor by which the renderers should be darkened if they are focused
     /// </summary>
-    public Color focusColor;
+    public float focusColor;
 
     private Color[] defaultColors;
 
@@ -59,11 +59,13 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
     /// Sets the color of the material of all renderers to newColor
     /// </summary>
     /// <param name="newColor">The color to which hte renderers should be set</param>
-    private void SetColorForAll(Color newColor)
+    private void SetColorForAll(float newColor)
     {
         foreach(Renderer targetRenderer in targetRenderers)
         {
-            targetRenderer.material.color = newColor;
+            print(targetRenderer.material.color.ToString()+"->"+(newColor * targetRenderer.material.color).ToString());
+            targetRenderer.material.color = newColor * targetRenderer.material.color;
+
         }
     }
 }
