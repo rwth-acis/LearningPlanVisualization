@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2946281870592333505}
   m_Layer: 0
   m_Name: LTAction
-  m_TagString: Untagged
+  m_TagString: Node
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,6 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677c8b61862ef8e458abb2dae8ae7339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: 
+  requirements: []
+  level: 0
+  done: 0
+  resources: []
+  evidence: 
 --- !u!1001 &1987738431575365594
 PrefabInstance:
   m_ObjectHideFlags: 0

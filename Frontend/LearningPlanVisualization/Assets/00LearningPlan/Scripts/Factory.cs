@@ -5,16 +5,36 @@ using UnityEngine.UI;
 
 public class Factory : MonoBehaviour
 {
-    public GameObject prefabLTGoal;
-    public GameObject prefabLTSubgoal;
-    public GameObject prefabLTAction;
+
+    i5.Toolkit.Core.Spawners.Spawner goalSpawner;
+    i5.Toolkit.Core.Spawners.Spawner subgoalSpawner;
+    i5.Toolkit.Core.Spawners.Spawner actionSpawner;
+    i5.Toolkit.Core.Spawners.Spawner connectionSpawner;
 
     public Mesh newMesh;
 
     public GameObject prefabLTConnection;
     private void Awake()
     {
-
+        var spawner = FindObjectsOfType<i5.Toolkit.Core.Spawners.Spawner>() as i5.Toolkit.Core.Spawners.Spawner[];
+        foreach (var go in spawner)
+        {
+            switch (go.name)
+            {
+                case "ActionSpawner":
+                    actionSpawner = go;
+                    break;
+                case "SubgoalSpawner":
+                    subgoalSpawner = go;
+                    break;
+                case "GoalSpawner":
+                    goalSpawner = go;
+                    break;
+                case "ConnectionSpawner":
+                    connectionSpawner = go;
+                    break;
+            }
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -24,97 +44,116 @@ public class Factory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
-            var LTNgoal = Instantiate(prefabLTGoal, new Vector3(0, 0, 5), Quaternion.identity).GetComponentInChildren<LTGoal>();
-            LTNgoal.Create("Juggling");
+
+            goalSpawner.Spawn();
+            var goal = goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
+
+            subgoalSpawner.Spawn();
+            var subgoalClubs = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
+            subgoalSpawner.Spawn();
+            var subgoalRings = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
+            subgoalSpawner.Spawn();
+            var subgoalBalls = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
+
+            actionSpawner.Spawn();
+            var ball5 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var ball3 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var ball2 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var ball1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+
+            actionSpawner.Spawn();
+            var ring5 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var ring3 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var ring2 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var ring1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
 
 
-            var LTNsubgoalClubs = Instantiate(prefabLTSubgoal, new Vector3(-1.5f, 0, 3.5f), Quaternion.identity).GetComponentInChildren<LTSubgoal>();
-            LTNsubgoalClubs.Create("Clubs");
-            LTNgoal.requirements.Add(LTNsubgoalClubs);
+            actionSpawner.Spawn();
+            var clubBurn = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var club3 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var club2 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+            actionSpawner.Spawn();
+            var club1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+
+            goal.Create("Juggling", new Vector3(0, 0, 5));
+            subgoalClubs.Create("Clubs", new Vector3(-1.5f, 0, 3.5f));
+            subgoalRings.Create("Rings", new Vector3(1.5f, 0, 3.5f));
+            subgoalBalls.Create("Balls", new Vector3(0, 0, 2));
+            ball5.Create("5 Balls", new Vector3(0, 1, 2), true);
+            ball3.Create("3 Balls", new Vector3(1, 2, 2), true);
+            ball2.Create("2 Balls", new Vector3(-1, 2, 2), true);
+            ball1.Create("1 Ball", new Vector3(0, 3, 2), true);
+            ring5.Create("5 Rings", new Vector3(1.5f, 1, 3.5f), true);
+            ring3.Create("3 Rings", new Vector3(2.5f, 2, 3.5f), true);
+            ring2.Create("2 Rings", new Vector3(0.5f, 2, 3.5f), true);
+            ring1.Create("1 Ring", new Vector3(1.5f, 3, 3.5f), true);
+            clubBurn.Create("Burning Clubs", new Vector3(-2.5f, 1, 3.5f), false);
+            club3.Create("3 Clubs", new Vector3(-0.5f, 1, 3.5f), false);
+            club2.Create("2 Clubs", new Vector3(-0.5f, 2, 3.5f), false);
+            club1.Create("1 Clubs", new Vector3(-0.5f, 3, 3.5f), true);
+
+
+            goal.requirements.Add(subgoalClubs);
+            goal.requirements.Add(subgoalRings);
+
+            subgoalRings.requirements.Add(subgoalBalls);
+            subgoalRings.requirements.Add(ring5);
+            subgoalClubs.requirements.Add(subgoalBalls);
+            subgoalClubs.requirements.Add(club3);
+            subgoalClubs.requirements.Add(clubBurn);
+            subgoalBalls.requirements.Add(ball5);
+
+            ball5.requirements.Add(ball3);
+            ball5.requirements.Add(ball2);
+            ball2.requirements.Add(ball1);
+            ball3.requirements.Add(ball1);
+
+            ring5.requirements.Add(ring3);
+            ring5.requirements.Add(ring2);
+            ring2.requirements.Add(ring1);
+            ring3.requirements.Add(ring1);
+
+            club3.requirements.Add(club2);
+            club2.requirements.Add(club1);
+            clubBurn.requirements.Add(club1);
             
-            var LTNsubgoalRings = Instantiate(prefabLTSubgoal, new Vector3(1.5f, 0, 3.5f), Quaternion.identity).GetComponentInChildren<LTSubgoal>();
-            LTNsubgoalRings.Create("Rings");
-            LTNgoal.requirements.Add(LTNsubgoalRings);
 
-            var LTNsubgoalBalls = Instantiate(prefabLTSubgoal, new Vector3(0, 0, 2), Quaternion.identity).GetComponentInChildren<LTSubgoal>();
-            LTNsubgoalBalls.Create("Balls");
-            LTNsubgoalRings.requirements.Add(LTNsubgoalBalls);
-            LTNsubgoalClubs.requirements.Add(LTNsubgoalBalls);
-
-
-            var LTNball5 = Instantiate(prefabLTAction, new Vector3(0, 1, 2), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNball5.Create("5 Balls");
-            LTNball5.done = true;
-            LTNsubgoalBalls.requirements.Add(LTNball5);
-
-            var LTNball3 = Instantiate(prefabLTAction, new Vector3(1, 2, 2), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNball3.Create("3 Balls");
-            LTNball3.done = true;
-            LTNball5.requirements.Add(LTNball3);
-
-            var LTNball2 = Instantiate(prefabLTAction, new Vector3(-1, 2, 2), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNball2.Create("2 Balls");
-            LTNball2.done = true;
-            LTNball5.requirements.Add(LTNball2);
-
-            var LTNball1 = Instantiate(prefabLTAction, new Vector3(0, 3, 2), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNball1.Create("1 Ball");
-            LTNball1.done = true;
-            LTNball2.requirements.Add(LTNball1);
-            LTNball3.requirements.Add(LTNball1);
-
-
-            var LTNring5 = Instantiate(prefabLTAction, new Vector3(1.5f, 1, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNring5.Create("5 Rings");
-            LTNring5.done = true;
-            LTNsubgoalRings.requirements.Add(LTNring5);
-
-            var LTNring3 = Instantiate(prefabLTAction, new Vector3(2.5f, 2, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNring3.Create("3 Rings");
-            LTNring3.done = true;
-            LTNring5.requirements.Add(LTNring3);
-
-            var LTNring2 = Instantiate(prefabLTAction, new Vector3(0.5f, 2, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNring2.Create("2 Rings");
-            LTNring2.done = true;
-            LTNring5.requirements.Add(LTNring2);
-
-            var LTNring1 = Instantiate(prefabLTAction, new Vector3(1.5f, 3, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNring1.Create("1 Ring");
-            LTNring1.done = true;
-            LTNring2.requirements.Add(LTNring1);
-            LTNring3.requirements.Add(LTNring1);
-
-
-            var LTNclub3 = Instantiate(prefabLTAction, new Vector3(-0.5f, 1, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNclub3.Create("3 Clubs");
-            LTNsubgoalClubs.requirements.Add(LTNclub3);
-
-            var LTNclubBurn = Instantiate(prefabLTAction, new Vector3(-2.5f, 1, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNclubBurn.Create("Burning Clubs");
-            LTNsubgoalClubs.requirements.Add(LTNclubBurn);
-
-            var LTNclub2 = Instantiate(prefabLTAction, new Vector3(-0.5f, 2, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNclub2.Create("2 Clubs");
-            LTNclub3.requirements.Add(LTNclub2);
-
-            var LTNclub1 = Instantiate(prefabLTAction, new Vector3(-0.5f, 3, 3.5f), Quaternion.identity).GetComponentInChildren<LTAction>();
-            LTNclub1.Create("1 Club");
-            LTNclub1.done = true;
-            LTNclub2.requirements.Add(LTNclub1);
-            LTNclubBurn.requirements.Add(LTNclub1);
-
-
-
-            var lTNodes = FindObjectsOfType(typeof(LTNode)) as LTNode[];
-            foreach(var startnode in lTNodes)
+            foreach(var start in goalSpawner.SpawnedInstances)
             {
+                var startnode = start.GetComponentInChildren<LTNode>();
                 foreach (var endnode in startnode.requirements)
                 {
-                    var connection = Instantiate(prefabLTConnection, new Vector3(0, 0, 0), Quaternion.identity);
-                    connection.GetComponent<LTConnection>().Create(startnode, endnode);
+                    connectionSpawner.Spawn();
+                    connectionSpawner.MostRecentlySpawnedObject.GetComponent<LTConnection>().Create(startnode, endnode);
                 }
             }
+            foreach (var start in subgoalSpawner.SpawnedInstances)
+            {
+                var startnode = start.GetComponentInChildren<LTNode>();
+                foreach (var endnode in startnode.requirements)
+                {
+                    connectionSpawner.Spawn();
+                    connectionSpawner.MostRecentlySpawnedObject.GetComponent<LTConnection>().Create(startnode, endnode);
+                }
+            }
+            foreach (var start in actionSpawner.SpawnedInstances)
+            {
+                var startnode = start.GetComponentInChildren<LTNode>();
+                foreach (var endnode in startnode.requirements)
+                {
+                    connectionSpawner.Spawn();
+                    connectionSpawner.MostRecentlySpawnedObject.GetComponent<LTConnection>().Create(startnode, endnode);
+                }
+            }
+
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {

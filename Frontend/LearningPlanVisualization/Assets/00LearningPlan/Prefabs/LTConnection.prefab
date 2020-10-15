@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5106625108571304191}
   m_Layer: 0
   m_Name: LTConnection
-  m_TagString: Untagged
+  m_TagString: Connection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

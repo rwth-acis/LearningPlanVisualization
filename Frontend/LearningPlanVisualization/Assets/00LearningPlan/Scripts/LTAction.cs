@@ -26,7 +26,11 @@ public class LTAction : LTNode
         }
     }
 
-
+    public void Create(string newtitle, Vector3 position, bool isdone)
+    {
+        Create(newtitle, position);
+        done = isdone;
+    }
 
     // Start is called before the first frame update
     void Start()

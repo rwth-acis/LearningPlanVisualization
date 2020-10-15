@@ -17,7 +17,12 @@ abstract public class LTNode : MonoBehaviour
     public void Create(string newtitle)
     {
         title = newtitle;
-
+        name = newtitle;
+    }
+    public void Create(string newtitle,Vector3 position)
+    {
+        Create(newtitle);
+        transform.position = position;
     }
 
     public void ResetLevel()

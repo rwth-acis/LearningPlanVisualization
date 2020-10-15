@@ -12,6 +12,7 @@ public class LTNodeVisualizer : MonoBehaviour
     Material materialAvailable;
     Material materialNotAvailable;
     MeshRenderer meshRenderer;
+    public TextMeshPro titleText;
 
     void Awake()
     {
@@ -27,8 +28,7 @@ public class LTNodeVisualizer : MonoBehaviour
         materialNotAvailable = Resources.Load<Material>("Materials/NodeNotAvailable");
         meshRenderer = GetComponentInChildren<MeshRenderer>();
 
-        var text = GetComponentInChildren<TextMeshPro>();
-        text.text = node.title;
+       titleText.text = node.title;
     }
 
     public void MaterialUpdate()
