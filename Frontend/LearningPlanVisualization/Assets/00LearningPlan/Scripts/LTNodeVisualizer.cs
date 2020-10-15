@@ -8,26 +8,48 @@ using TMPro;
 public class LTNodeVisualizer : MonoBehaviour
 {
     LTNode node;
-    Material materialDone;
-    Material materialAvailable;
-    Material materialNotAvailable;
-    MeshRenderer meshRenderer;
-    public TextMeshPro titleText;
+    public Material materialDone;
+    public Material materialAvailable;
+    public Material materialNotAvailable;
+    public MeshRenderer meshRenderer;
+    public GameObject titlePlate;
+    public GameObject detailsPlate;
+
+    TextMeshPro titleText;
+    TextMeshPro detailsText;
+    bool detailsVisible = false;
+
+    public bool DetailsVisible
+    {
+        get { return detailsVisible; }
+        set
+        {
+            detailsVisible = value;
+            if (detailsVisible)
+            {
+                detailsText.text = node.GetDetailsText();
+                detailsPlate.transform.localScale = new Vector3(1,1,1);
+                titlePlate.transform.localScale = new Vector3(0,0,0);
+            }
+            else
+            {
+                detailsPlate.transform.localScale = new Vector3(0,0,0);
+                titlePlate.transform.localScale = new Vector3(1,1,1);
+            }
+            
+        }
+    }
 
     void Awake()
     {
-
+        titleText = titlePlate.GetComponentInChildren<TextMeshPro>();
+        detailsText = detailsPlate.GetComponentInChildren<TextMeshPro>();
+        node = GetComponent<LTNode>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        node = GetComponent<LTNode>();
-        materialDone = Resources.Load<Material>("Materials/NodeDone");
-        materialAvailable = Resources.Load<Material>("Materials/NodeAvailable");
-        materialNotAvailable = Resources.Load<Material>("Materials/NodeNotAvailable");
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-
        titleText.text = node.title;
     }
 
@@ -36,7 +58,7 @@ public class LTNodeVisualizer : MonoBehaviour
         switch (node.status)
         {
             case LTStatus.Done:
-                    meshRenderer.material = materialDone;
+                meshRenderer.material = materialDone;
                 break;
             case LTStatus.Available:
                 meshRenderer.material = materialAvailable;

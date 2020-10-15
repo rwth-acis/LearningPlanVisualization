@@ -8,6 +8,8 @@ public class LTSubgoal : LTNode
     public int doneActions { get; private set; }
     public List<LTAction> actions { get; private set; }
 
+   
+
     public override void RepositionRequirements(float margin)
     {
         List<LTAction> requiredActions = new List<LTAction>();

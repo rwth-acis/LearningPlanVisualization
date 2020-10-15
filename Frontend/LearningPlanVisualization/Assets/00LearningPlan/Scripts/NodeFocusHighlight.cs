@@ -17,6 +17,7 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
     public float focusColor;
 
     private Color[] defaultColors;
+    private LTNodeVisualizer visualizer;
 
     /// <summary>
     /// Checks the component setup and initializes the default color array with the current colors of the renderer's materials
@@ -24,6 +25,7 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
     private void Awake()
     {
         defaultColors = new Color[targetRenderers.Length];
+        visualizer = GetComponent<LTNodeVisualizer>();
     }
 
     /// <summary>
@@ -52,7 +54,7 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
             targetRenderers[i].material.color = defaultColors[i];
         }
 
-        GetComponent<LTNodeVisualizer>().MaterialUpdate();
+        visualizer.MaterialUpdate();
     }
 
     /// <summary>
@@ -63,7 +65,6 @@ public class NodeFocusHighlight : MonoBehaviour, IMixedRealityFocusHandler
     {
         foreach(Renderer targetRenderer in targetRenderers)
         {
-            print(targetRenderer.material.color.ToString()+"->"+(newColor * targetRenderer.material.color).ToString());
             targetRenderer.material.color = newColor * targetRenderer.material.color;
 
         }

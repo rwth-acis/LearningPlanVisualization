@@ -14,6 +14,11 @@ abstract public class LTNode : MonoBehaviour
     public LTStatus status { get; protected set; }
     public int level;
 
+    virtual public string GetDetailsText()
+    {
+        return "NOT IMPLEMENTED";
+    }
+
     public void Create(string newtitle)
     {
         title = newtitle;

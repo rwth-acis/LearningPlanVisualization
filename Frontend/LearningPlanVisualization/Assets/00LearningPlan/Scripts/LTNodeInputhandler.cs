@@ -7,10 +7,12 @@ public class LTNodeInputhandler : MonoBehaviour, IMixedRealityPointerHandler
 {
     Visibility visibility;
     LTNode node;
+    LTNodeVisualizer nodeVisualizer;
     void Start()
     {
         visibility = GetComponent<Visibility>();
         node = GetComponent<LTNode>();
+        nodeVisualizer = GetComponent<LTNodeVisualizer>();
     }
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
@@ -21,7 +23,7 @@ public class LTNodeInputhandler : MonoBehaviour, IMixedRealityPointerHandler
             visibility.RequirementsVisible = !visibility.RequirementsVisible;
         }
         if (node.GetType() == typeof(LTAction)){
-
+            nodeVisualizer.DetailsVisible = !nodeVisualizer.DetailsVisible;
         }
     }
 
