@@ -18,6 +18,14 @@ abstract public class LTNode : MonoBehaviour
     {
         return "NOT IMPLEMENTED";
     }
+    virtual public void BtnDoneClicked()
+    {
+        print("BTNDoneClicked");
+    }
+    virtual public string GetTitleText()
+    {
+        return title;
+    }
 
     public void Create(string newtitle)
     {

@@ -33,7 +33,7 @@ public class LTConnection : MonoBehaviour
             transform.localScale = new Vector3(1,length, 1);
             transform.up = endPosition - startPosition;
             transform.position = (endPosition + startPosition) * 0.5f;
-            renderer.material.mainTextureScale = new Vector2(2f, length);
+            renderer.material.mainTextureScale = new Vector2(3f, length);
 
         }
         else

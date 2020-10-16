@@ -18,6 +18,7 @@ public class LTNodeVisualizer : MonoBehaviour
     TextMeshPro titleText;
     TextMeshPro detailsText;
     bool detailsVisible = false;
+    LTStatus status;
 
     public bool DetailsVisible
     {
@@ -50,7 +51,8 @@ public class LTNodeVisualizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       titleText.text = node.title;
+       titleText.text = node.GetTitleText();
+        MaterialUpdate();
     }
 
     public void MaterialUpdate()
@@ -66,6 +68,15 @@ public class LTNodeVisualizer : MonoBehaviour
             case LTStatus.NotAvailable:
                 meshRenderer.material = materialNotAvailable;
                 break;
+        }
+    }
+
+    void Update()
+    {
+        if (status != node.status)
+        {
+            status = node.status;
+            MaterialUpdate();
         }
     }
 }

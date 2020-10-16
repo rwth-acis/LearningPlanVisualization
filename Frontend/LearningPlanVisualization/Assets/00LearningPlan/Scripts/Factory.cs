@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using I5Spawner = i5.Toolkit.Core.Spawners.Spawner;
 
 public class Factory : MonoBehaviour
 {
 
-    i5.Toolkit.Core.Spawners.Spawner goalSpawner;
-    i5.Toolkit.Core.Spawners.Spawner subgoalSpawner;
-    i5.Toolkit.Core.Spawners.Spawner actionSpawner;
-    i5.Toolkit.Core.Spawners.Spawner connectionSpawner;
-    i5.Toolkit.Core.Spawners.Spawner[] nodeSpawner;
+    I5Spawner goalSpawner;
+    I5Spawner subgoalSpawner;
+    I5Spawner actionSpawner;
+    I5Spawner connectionSpawner;
+    I5Spawner[] nodeSpawner;
 
     public Mesh newMesh;
 
     public GameObject prefabLTConnection;
     private void Awake()
     {
-        var spawner = FindObjectsOfType<i5.Toolkit.Core.Spawners.Spawner>() as i5.Toolkit.Core.Spawners.Spawner[];
+        var spawner = FindObjectsOfType<I5Spawner>() as I5Spawner[];
         foreach (var go in spawner)
         {
             switch (go.name)
@@ -37,7 +38,7 @@ public class Factory : MonoBehaviour
                     break;
             }
         }
-        nodeSpawner = new i5.Toolkit.Core.Spawners.Spawner[] { goalSpawner, subgoalSpawner, actionSpawner };
+        nodeSpawner = new I5Spawner[] { goalSpawner, subgoalSpawner, actionSpawner };
     }
     // Start is called before the first frame update
     void Start()
@@ -144,16 +145,10 @@ public class Factory : MonoBehaviour
                         connectionSpawner.Spawn();
                         connectionSpawner.MostRecentlySpawnedObject.GetComponent<LTConnection>().Create(startnode, endnode);
                     }
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            foreach (var spawner in nodeSpawner)
-            {
-                foreach (var instance in spawner.SpawnedInstances)
-                {
-                    instance.GetComponentInChildren<LTNodeVisualizer>().MaterialUpdate();
+                    if (spawner == subgoalSpawner)
+                    {
+                        start.GetComponentInChildren<LTSubgoal>().UpdateActions();
+                    }
                 }
             }
         }

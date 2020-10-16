@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.i5.toolkit.core": "https://github.com/rwth-acis/i5-Toolkit-for-Unity.git#upm",
+    "com.i5.toolkit.core": "https://github.com/rwth-acis/i5-Toolkit-for-Unity.git#v1.1.0",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.2.3",
     "com.unity.collab-proxy": "1.2.15",
@@ -43,8 +43,8 @@
   },
   "lock": {
     "com.i5.toolkit.core": {
-      "revision": "upm",
-      "hash": "561687dbc36d0df22a7fbed11e5020e2b1ceef32"
+      "revision": "v1.1.0",
+      "hash": "1c8ebf378a25b5ef4db7802c5858d66cac614d11"
     }
   }
 }

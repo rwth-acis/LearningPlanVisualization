@@ -9,7 +9,6 @@ public class LTSubgoal : LTNode
     public List<LTAction> actions { get; private set; }
 
    
-
     public override void RepositionRequirements(float margin)
     {
         List<LTAction> requiredActions = new List<LTAction>();
@@ -43,6 +42,13 @@ public class LTSubgoal : LTNode
         }
     }
 
+    public override string GetTitleText()
+    {
+        var returnString = title;
+        returnString += "\n<align=\"right\"><size=60%>"+doneActions+"/"+neededActions+"</size></align>";
+        return returnString;
+    }
+
     public void UpdateActions()
     {
         actions = GetAllRequirements();
@@ -50,8 +56,8 @@ public class LTSubgoal : LTNode
         doneActions = 0;
         foreach(var action in actions)
         {
+            neededActions++;
             if (action.done) doneActions++;
-            else neededActions++;
         }
     }
 
@@ -74,5 +80,8 @@ public class LTSubgoal : LTNode
         }
         if (notDone) status = LTStatus.Available;
         else status = LTStatus.Done;
+    }
+    private void Start()
+    {
     }
 }

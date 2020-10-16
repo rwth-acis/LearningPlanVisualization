@@ -10,8 +10,12 @@ public class LTAction : LTNode
     public string evidence;
     public TimeSpan time = TimeSpan.Zero;
 
+    override public void BtnDoneClicked()
+    {
+        done = !done;
+    }
 
-    public override string GetDetailsText()
+    override public string GetDetailsText()
     {
         string returnText = "";
         returnText += "<u><size=140%><align=\"center\">"+title+"</align></size></u>\n\n";
@@ -26,24 +30,10 @@ public class LTAction : LTNode
 
         returnText += "Time:\n";
         returnText += "<indent=2em>" + time.Days + " Days | " + time.Hours + " Hours | " + time.Minutes + " Minutes</indent>";
-
-
-        /*
-            < u >< size = 140 %>< align = "center" > test title </ align ></ size ></ u >
-
-           Resources:
-< indent = 2em > test a d sadfdsf
-     gfsg hdg h dghgh hdfh hdfh hdfgh hfdghdf </ indent >
-     Evidence:
-< indent = 2em > test a d sadfdsf gfsg hdg h dghgh hdfh hdfh hdfgh hfdghdf </ indent >
-     Time:
-< indent = 2em > test stunden </ indent >
-*/
-
         return returnText;
     }
 
-    public override void RepositionRequirements(float margin)
+    override public void RepositionRequirements(float margin)
     {
         var offset = requirements.Count - 1f;
         var i = 0;
@@ -70,7 +60,6 @@ public class LTAction : LTNode
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -81,7 +70,7 @@ public class LTAction : LTNode
         {
             foreach (var node in requirements)
             {
-                if (!(node.status==LTStatus.Done))
+                if (!(node.status == LTStatus.Done))
                 {
                     status = LTStatus.NotAvailable;
                     return;
