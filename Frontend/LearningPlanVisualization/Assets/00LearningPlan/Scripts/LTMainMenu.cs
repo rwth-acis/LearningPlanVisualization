@@ -1,63 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 using I5Spawner = i5.Toolkit.Core.Spawners.Spawner;
 
-public class Factory : MonoBehaviour
+public class LTMainMenu : MonoBehaviour
 {
 
-    I5Spawner goalSpawner;
-    I5Spawner subgoalSpawner;
-    I5Spawner actionSpawner;
-    I5Spawner connectionSpawner;
+    public I5Spawner goalSpawner;
+    public I5Spawner subgoalSpawner;
+    public I5Spawner actionSpawner;
+    public I5Spawner connectionSpawner;
     I5Spawner[] nodeSpawner;
-
     public Mesh newMesh;
 
-    public GameObject prefabLTConnection;
     private void Awake()
     {
-        var spawner = FindObjectsOfType<I5Spawner>() as I5Spawner[];
-        foreach (var go in spawner)
-        {
-            switch (go.name)
-            {
-                case "ActionSpawner":
-                    actionSpawner = go;
-                    break;
-                case "SubgoalSpawner":
-                    subgoalSpawner = go;
-                    break;
-                case "GoalSpawner":
-                    goalSpawner = go;
-                    break;
-                case "ConnectionSpawner":
-                    connectionSpawner = go;
-                    break;
-            }
-        }
         nodeSpawner = new I5Spawner[] { goalSpawner, subgoalSpawner, actionSpawner };
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            CreateDummyTree();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            ChangeGoalMesh();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            RepositionTree();
-        }
     }
 
     public void CreateDummyTree()

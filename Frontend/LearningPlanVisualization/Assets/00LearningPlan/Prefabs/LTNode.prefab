@@ -564,6 +564,7 @@ GameObject:
   - component: {fileID: 412651711456060046}
   - component: {fileID: 114275176861824280}
   - component: {fileID: 114251018975357298}
+  - component: {fileID: 2049895949138837090}
   m_Layer: 0
   m_Name: LTNode
   m_TagString: Untagged
@@ -630,6 +631,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c483a4abac7806f4e9923d5ed710f1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2049895949138837090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624808711361905208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03daa81ea5f685f4ebf6e32038d058ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostTransform: {fileID: 5846638470747389261}
+  manipulationType: 0
+  twoHandedManipulationType: 5
+  allowFarManipulation: 1
+  oneHandRotationModeNear: 4
+  oneHandRotationModeFar: 4
+  releaseBehavior: 0
+  constraintOnRotation: 0
+  constraintOnMovement: 0
+  smoothingActive: 1
+  smoothingAmountOneHandManip: 0.001
+  OnManipulationStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnManipulationEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5529939717299845353
 GameObject:
   m_ObjectHideFlags: 0
