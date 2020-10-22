@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuIcon : MonoBehaviour, IMixedRealityPointerHandler
+public class MenuIcon : MonoBehaviour
 {
     public GameObject menuPlate;
 
     bool menuPlateVisible;
+    float time;
+
     public bool MenuPlateVisible
     {
         get { return menuPlateVisible; }
@@ -18,21 +20,17 @@ public class MenuIcon : MonoBehaviour, IMixedRealityPointerHandler
             else menuPlate.transform.localScale = new Vector3(0, 0, 0);
         }
     }
-    public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-        MenuPlateVisible = !menuPlateVisible;
-    }
 
-    public void OnPointerDown(MixedRealityPointerEventData eventData)
+    public void OnClickStart()
     {
+        time = Time.time * 1000;
     }
-
-    public void OnPointerDragged(MixedRealityPointerEventData eventData)
+    public void OnClickEnd()
     {
-    }
-
-    public void OnPointerUp(MixedRealityPointerEventData eventData)
-    {
+        if (Time.time * 1000 - time < 200)
+        {
+            MenuPlateVisible = !menuPlateVisible;
+        }
     }
 
     // Start is called before the first frame update

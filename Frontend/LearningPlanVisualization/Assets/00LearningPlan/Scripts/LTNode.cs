@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.MixedReality.Toolkit.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,28 @@ abstract public class LTNode : MonoBehaviour
     public List<LTNode> requirements;
     public LTStatus status { get; protected set; }
     public int level;
+    protected LTNodeVisualizer visualizer;
+    protected Visibility visibility;
+    float time;
+    ManipulationHandler manipulationHandler;
+    Transform noTransform;
+
+    public delegate void ChangePosition();
+    public event ChangePosition OnChangePosition;
+
+
+    private void Awake()
+    {
+        LTMainMenu.instance.OnChangeEditMode += HandleChangeEditMode;
+        manipulationHandler = GetComponent<ManipulationHandler>();
+        noTransform = manipulationHandler.HostTransform;
+    }
+
+    virtual public void HandleChangeEditMode(bool editMode)
+    {
+        if (editMode) manipulationHandler.HostTransform = transform;
+        else manipulationHandler.HostTransform = noTransform;
+    }
 
     virtual public string GetDetailsText()
     {
@@ -22,9 +45,29 @@ abstract public class LTNode : MonoBehaviour
     {
         print("BTNDoneClicked");
     }
+    public void OnClickStart()
+    {
+        time = Time.time * 1000;
+    }
+    public void OnClickEnd()
+    {
+        if (Time.time * 1000 - time < 200)
+        {
+            NodeClicked();
+        }
+    }
+
+    virtual public void NodeClicked()
+    {
+    }
+
     virtual public string GetTitleText()
     {
         return title;
+    }
+
+    virtual public void UpdateStatus()
+    {
     }
 
     public void Create(string newtitle)
@@ -75,5 +118,15 @@ abstract public class LTNode : MonoBehaviour
             }
         }
         return returnList;
+    }
+
+    void Update()
+    {
+        if (transform.hasChanged)
+        {
+            transform.hasChanged = false;
+            OnChangePosition?.Invoke();
+        }
+        UpdateStatus();
     }
 }

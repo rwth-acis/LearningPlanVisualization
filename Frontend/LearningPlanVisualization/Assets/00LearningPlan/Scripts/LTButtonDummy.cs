@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class LTButtonDummy : MonoBehaviour, IMixedRealityPointerHandler
 {
-    public GameObject menuPlate;
-    LTMainMenu menu;
-
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
-        menu.CreateDummyTree();
+        LTMainMenu.instance.CreateDummyTree();
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
@@ -23,17 +20,5 @@ public class LTButtonDummy : MonoBehaviour, IMixedRealityPointerHandler
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        menu = menuPlate.GetComponent<LTMainMenu>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LTButtonReposition : MonoBehaviour, IMixedRealityPointerHandler
+public class LTButtonEditMode : MonoBehaviour, IMixedRealityPointerHandler
 {
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
-        LTMainMenu.instance.RepositionTree();
+        LTMainMenu.instance.SwitchEditMode();
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)

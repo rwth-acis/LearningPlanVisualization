@@ -53,6 +53,77 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 31566181229186438}
     m_Modifications:
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5933810038289724372}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5933810038289724372}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationStarted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: Profiles.Array.data[0].Themes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5933810038289724372}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NodeClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: InputActionId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: Profiles.Array.data[0].Themes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 080dc136f48df464e9ca8283cf31bff9,
+        type: 2}
+    - target: {fileID: 3716309069162356689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: Profiles.Array.data[0].HadDefaultTheme
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236787668023386410, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4624808711361905208, guid: 4cae22e38057ee747b22bcc85df8cdea,
         type: 3}
       propertyPath: m_Name
@@ -112,6 +183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340771774698708689, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cae22e38057ee747b22bcc85df8cdea, type: 3}

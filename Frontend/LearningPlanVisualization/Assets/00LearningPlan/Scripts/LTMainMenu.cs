@@ -6,7 +6,7 @@ using I5Spawner = i5.Toolkit.Core.Spawners.Spawner;
 
 public class LTMainMenu : MonoBehaviour
 {
-
+    public static LTMainMenu instance;
     public I5Spawner goalSpawner;
     public I5Spawner subgoalSpawner;
     public I5Spawner actionSpawner;
@@ -14,9 +14,19 @@ public class LTMainMenu : MonoBehaviour
     I5Spawner[] nodeSpawner;
     public Mesh newMesh;
 
+    public delegate void ChangeEditMode(bool editMode);
+    public event ChangeEditMode OnChangeEditMode;
+    public bool editMode { get; private set; }
+
     private void Awake()
     {
+        instance = this;
         nodeSpawner = new I5Spawner[] { goalSpawner, subgoalSpawner, actionSpawner };
+        editMode = false;
+    }
+    private void Start()
+    {
+        OnChangeEditMode?.Invoke(editMode);
     }
 
     public void CreateDummyTree()
@@ -136,5 +146,10 @@ public class LTMainMenu : MonoBehaviour
         goal.ResetLevel();
         goal.CalculateLevel(-1);
         goal.RepositionRequirements(1.5f);
+    }
+    public void SwitchEditMode()
+    {
+        editMode = !editMode;
+        OnChangeEditMode?.Invoke(editMode);
     }
 }

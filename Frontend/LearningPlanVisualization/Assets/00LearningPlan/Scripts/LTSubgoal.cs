@@ -8,8 +8,14 @@ public class LTSubgoal : LTNode
     public int doneActions { get; private set; }
     public List<LTAction> actions { get; private set; }
 
-   
-    public override void RepositionRequirements(float margin)
+    public override void NodeClicked()
+    {
+
+        base.NodeClicked();
+        visibility.RequirementsVisible = !visibility.RequirementsVisible;
+    }
+
+    override public void RepositionRequirements(float margin)
     {
         List<LTAction> requiredActions = new List<LTAction>();
         List<LTSubgoal> requiredSubgoals = new List<LTSubgoal>();
@@ -61,7 +67,7 @@ public class LTSubgoal : LTNode
         }
     }
 
-    void Update()
+    override public void UpdateStatus()
     {
         var notDone = false;
         foreach (var node in requirements)
@@ -81,7 +87,10 @@ public class LTSubgoal : LTNode
         if (notDone) status = LTStatus.Available;
         else status = LTStatus.Done;
     }
+
     private void Start()
     {
+        visualizer = GetComponent<LTNodeVisualizer>();
+        visibility = GetComponent<Visibility>();
     }
 }

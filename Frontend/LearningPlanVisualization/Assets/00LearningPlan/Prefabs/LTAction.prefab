@@ -66,6 +66,36 @@ PrefabInstance:
       propertyPath: detailsText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3048296086014365484}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3048296086014365484}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationStarted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4236787668023386410, guid: 4cae22e38057ee747b22bcc85df8cdea,
         type: 3}
       propertyPath: m_Mesh

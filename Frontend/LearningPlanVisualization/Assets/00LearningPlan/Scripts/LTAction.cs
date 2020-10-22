@@ -47,6 +47,10 @@ public class LTAction : LTNode
             i++;
         }
     }
+    public override void NodeClicked()
+    {
+        visualizer.DetailsVisible = !visualizer.DetailsVisible;
+    }
 
     public void Create(string newTitle, Vector3 newPosition, bool newDone, List<string> newResources, string newEvidence, TimeSpan newTime)
     {
@@ -60,10 +64,11 @@ public class LTAction : LTNode
     // Start is called before the first frame update
     void Start()
     {
+        visualizer = GetComponent<LTNodeVisualizer>();
+        visibility = GetComponent<Visibility>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    override public void UpdateStatus()
     {
         if (done) status = LTStatus.Done;
         else

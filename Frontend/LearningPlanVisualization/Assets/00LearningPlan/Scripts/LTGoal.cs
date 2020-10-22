@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LTGoal : LTNode
 {
-    public override void RepositionRequirements(float margin)
+    override public void RepositionRequirements(float margin)
     {
         var offset = requirements.Count-1f;
         var i = 0;
@@ -16,15 +16,14 @@ public class LTGoal : LTNode
         }
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        visualizer = GetComponent<LTNodeVisualizer>();
+        visibility = GetComponent<Visibility>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    override public void UpdateStatus()
     {
         foreach (var node in requirements)
         {
