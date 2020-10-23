@@ -13,8 +13,8 @@ public class Visibility : MonoBehaviour
         set
         {
             visible = value;
-            if (visible) transform.localScale = new Vector3(1, 1, 1);
-            else transform.localScale = new Vector3(0, 0, 0);
+            if (visible) transform.localScale = Vector3.one;
+            else transform.localScale = Vector3.zero;
             RequirementsVisible = visible;
         }
     }

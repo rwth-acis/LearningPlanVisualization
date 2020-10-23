@@ -25,7 +25,6 @@ public class LTConnection : MonoBehaviour
         start.OnChangePosition += HandleChangePosition;
         end.OnChangePosition += HandleChangePosition;
         HandleChangePosition();
-
     }
 
     void HandleChangePosition()
@@ -39,7 +38,7 @@ public class LTConnection : MonoBehaviour
 
 
         if (visible) transform.localScale = new Vector3(1, length, 1);
-        else transform.localScale = new Vector3(0, 0, 0);
+        else transform.localScale = Vector3.zero;
         
     }
 
@@ -58,7 +57,7 @@ public class LTConnection : MonoBehaviour
             if (visible)
             {
                 visible = false;
-                transform.localScale = new Vector3(0, 0, 0);
+                transform.localScale = Vector3.zero;
             }
         }
     }

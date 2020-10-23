@@ -24,6 +24,7 @@ public class LTMainMenu : MonoBehaviour
         nodeSpawner = new I5Spawner[] { goalSpawner, subgoalSpawner, actionSpawner };
         editMode = false;
     }
+
     private void Start()
     {
         OnChangeEditMode?.Invoke(editMode);
@@ -34,40 +35,56 @@ public class LTMainMenu : MonoBehaviour
         goalSpawner.Spawn();
         var goal = goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
 
-        subgoalSpawner.Spawn();
-        var subgoalClubs = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
-        subgoalSpawner.Spawn();
-        var subgoalRings = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
+
         subgoalSpawner.Spawn();
         var subgoalBalls = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
 
         actionSpawner.Spawn();
         var ball5 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var ball3 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var ball2 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var ball1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
+
+
+        subgoalSpawner.Spawn();
+        var subgoalRings = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
 
         actionSpawner.Spawn();
         var ring5 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var ring3 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var ring2 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var ring1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
 
+        
+        subgoalSpawner.Spawn();
+        var subgoalClubs = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
 
         actionSpawner.Spawn();
         var clubBurn = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var club3 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var club2 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
         actionSpawner.Spawn();
         var club1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+        actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
 
 
         var dummyResources = new List<string>();
@@ -133,13 +150,16 @@ public class LTMainMenu : MonoBehaviour
                 }
             }
         }
+
     }
+
     public void ChangeGoalMesh()
     {
         var goal = FindObjectOfType<LTGoal>();
         var mesh = goal.GetComponentInChildren<MeshFilter>();
         mesh.mesh = newMesh;
     }
+
     public void RepositionTree()
     {
         var goal = goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
@@ -147,6 +167,7 @@ public class LTMainMenu : MonoBehaviour
         goal.CalculateLevel(-1);
         goal.RepositionRequirements(1.5f);
     }
+
     public void SwitchEditMode()
     {
         editMode = !editMode;

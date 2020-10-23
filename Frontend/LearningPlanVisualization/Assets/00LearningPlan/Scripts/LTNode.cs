@@ -33,7 +33,7 @@ abstract public class LTNode : MonoBehaviour
 
     virtual public void HandleChangeEditMode(bool editMode)
     {
-        if (editMode) manipulationHandler.HostTransform = transform;
+        if (editMode) manipulationHandler.HostTransform = transform.parent;
         else manipulationHandler.HostTransform = noTransform;
     }
 
