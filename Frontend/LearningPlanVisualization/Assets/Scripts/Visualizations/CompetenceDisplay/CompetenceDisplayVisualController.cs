@@ -114,7 +114,7 @@ public class CompetenceDisplayVisualController : MonoBehaviour, IVisualizationVi
                 );
         }
         boundingBox.transform.localPosition = new Vector3(0, 0, 0.5f);
-        boundingBox.Refresh();
+        //boundingBox.Refresh();
 
         titleLabel.MaxWidth = targetRadius * 0.8f;
         titleLabel.MaxHeight = targetRadius * 0.8f;

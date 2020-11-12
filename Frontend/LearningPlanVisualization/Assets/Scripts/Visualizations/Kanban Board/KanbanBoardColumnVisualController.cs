@@ -282,7 +282,7 @@ public class KanbanBoardColumnVisualController : MonoBehaviour, IVisualizationVi
             );
 
         boundingboxCollider.size = 1.01f * background.localScale;
-        boundingBox.Refresh();
+        //boundingBox.Refresh();
 
         DetermineGridSize();
         UpdateVisuals();

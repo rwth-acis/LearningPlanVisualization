@@ -7,6 +7,7 @@ using UnityEngine;
 
 
 public enum LTStatus { Done, Available, NotAvailable }
+public enum LTType { Goal, Subgoal, Action}
 
 abstract public class LTNode : MonoBehaviour
 {
@@ -16,7 +17,7 @@ abstract public class LTNode : MonoBehaviour
     public int level;
     protected LTNodeVisualizer visualizer;
     protected Visibility visibility;
-    float time;
+    float clickTime;
     ManipulationHandler manipulationHandler;
     Transform noTransform;
 
@@ -33,8 +34,15 @@ abstract public class LTNode : MonoBehaviour
 
     virtual public void HandleChangeEditMode(bool editMode)
     {
-        if (editMode) manipulationHandler.HostTransform = transform.parent;
-        else manipulationHandler.HostTransform = noTransform;
+        if (editMode)
+        {
+            manipulationHandler.HostTransform = transform.parent;
+
+        }
+        else
+        {
+            manipulationHandler.HostTransform = noTransform;
+        }
     }
 
     virtual public string GetDetailsText()
@@ -47,11 +55,11 @@ abstract public class LTNode : MonoBehaviour
     }
     public void OnClickStart()
     {
-        time = Time.time * 1000;
+        clickTime = Time.time * 1000;
     }
     public void OnClickEnd()
     {
-        if (Time.time * 1000 - time < 200)
+        if (Time.time * 1000 - clickTime < 200)
         {
             NodeClicked();
         }

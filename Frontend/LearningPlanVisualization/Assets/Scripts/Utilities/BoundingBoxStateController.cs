@@ -58,7 +58,7 @@ public class BoundingBoxStateController : MonoBehaviour
         boundingBox.Active = boundingBoxActive;
         if (boundingBoxActive)
         {
-            boundingBox.Refresh();
+            //boundingBox.Refresh();
         }
         if (manipulationHandler != null)
         {

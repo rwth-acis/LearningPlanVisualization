@@ -66,7 +66,7 @@ public class ProgressBarController : MonoBehaviour, IProgressBarVisuals
                 value + 0.05f, // add 0.05f to encapsulate the end caps
                 boundingBoxCollider.size.y,
                 boundingBoxCollider.size.z);
-            boundingBox.Refresh();
+            //boundingBox.Refresh();
 
             UpdateTextLabelPositioning(value);
         }
@@ -208,7 +208,7 @@ public class ProgressBarController : MonoBehaviour, IProgressBarVisuals
             newLength + 0.05f, // add 0.05f to encapsulate the end caps
             boundingBoxCollider.size.y,
             boundingBoxCollider.size.z);
-        boundingBox.Refresh();
+        //boundingBox.Refresh();
 
         UpdateTextLabelPositioning(newLength);
     }

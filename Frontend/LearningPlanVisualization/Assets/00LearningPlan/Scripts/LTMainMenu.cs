@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using I5Spawner = i5.Toolkit.Core.Spawners.Spawner;
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public class LTMainMenu : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class LTMainMenu : MonoBehaviour
     public I5Spawner subgoalSpawner;
     public I5Spawner actionSpawner;
     public I5Spawner connectionSpawner;
+    public NonNativeKeyboard keyboard;
     I5Spawner[] nodeSpawner;
     public Mesh newMesh;
 
     public delegate void ChangeEditMode(bool editMode);
     public event ChangeEditMode OnChangeEditMode;
     public bool editMode { get; private set; }
+    private GameObject connections;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class LTMainMenu : MonoBehaviour
     private void Start()
     {
         OnChangeEditMode?.Invoke(editMode);
+        connections = new GameObject("Connections");
     }
 
     public void CreateDummyTree()
@@ -143,6 +147,7 @@ public class LTMainMenu : MonoBehaviour
                 {
                     connectionSpawner.Spawn();
                     connectionSpawner.MostRecentlySpawnedObject.GetComponent<LTConnection>().Create(startnode, endnode);
+                    connectionSpawner.MostRecentlySpawnedObject.transform.SetParent(connections.transform);
                 }
                 if (spawner == subgoalSpawner)
                 {
