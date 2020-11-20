@@ -15,7 +15,7 @@ MonoBehaviour:
   title: 
   requirements: []
   level: 0
-  editMaterial: {fileID: 2100000, guid: 4b3479d81d352b54da77ace280279730, type: 2}
+  self: {fileID: 8231514368295661385}
 --- !u!1 &8231514368295661385
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: onManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3052687802149803848, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4236787668023386410, guid: 4cae22e38057ee747b22bcc85df8cdea,
         type: 3}
       propertyPath: m_Mesh
@@ -183,6 +188,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591100504651437430, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889359092351326540, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2440664889957511506}
+    - target: {fileID: 8889359092351326540, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Delete
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cae22e38057ee747b22bcc85df8cdea, type: 3}

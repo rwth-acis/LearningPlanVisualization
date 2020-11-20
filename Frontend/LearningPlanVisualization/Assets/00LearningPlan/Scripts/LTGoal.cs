@@ -35,4 +35,13 @@ public class LTGoal : LTNode
         }
         status = LTStatus.Done;
     }
+
+    public override void Delete()
+    {
+        foreach (var item in LTMainMenu.instance.subgoalSpawner.SpawnedInstances)
+        {
+            item.GetComponentInChildren<LTSubgoal>().Delete();
+        }
+        base.Delete();
+    }
 }

@@ -6,6 +6,9 @@ public class LTConnection : MonoBehaviour
 {
     public LTNode start;
     public LTNode end;
+    public GameObject deleteButton;
+    public GameObject cylinder;
+    public GameObject self;
     private Vector3 startPosition;
     private Vector3 endPosition;
     private Renderer renderer;
@@ -13,6 +16,8 @@ public class LTConnection : MonoBehaviour
     private Visibility endVisibility;
     private bool visible = false;
     private float length;
+
+
     // Start is called before the first frame update
     public void Create(LTNode newStart, LTNode newEnd)
     {
@@ -31,15 +36,11 @@ public class LTConnection : MonoBehaviour
     {
         startPosition = start.transform.position;
         endPosition = end.transform.position;
-        transform.up = endPosition - startPosition;
+        cylinder.transform.up = endPosition - startPosition;
         transform.position = (endPosition + startPosition) * 0.5f;
         length = Vector3.Magnitude(endPosition - startPosition);
         renderer.material.mainTextureScale = new Vector2(3f, length);
-
-
-        if (visible) transform.localScale = new Vector3(1, length, 1);
-        else transform.localScale = Vector3.zero;
-        
+        cylinder.transform.localScale = new Vector3(1, length, 1);
     }
 
     void Update()
@@ -49,7 +50,7 @@ public class LTConnection : MonoBehaviour
             if (!visible)
             {
                 visible = true;
-                transform.localScale = new Vector3(1, length, 1);
+                transform.localScale = Vector3.one;
             }
         }
         else
@@ -62,4 +63,15 @@ public class LTConnection : MonoBehaviour
         }
     }
 
+    public void Delete()
+    {
+        start.requirements.Remove(end);
+        start.GetComponentInParent<LTNodeVisualizer>().MaterialUpdate();
+        Destroy(self);
+    }
+    private void OnDestroy()
+    {
+        start.OnChangePosition -= HandleChangePosition;
+        end.OnChangePosition -= HandleChangePosition;
+    }
 }

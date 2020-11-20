@@ -46,10 +46,11 @@ MonoBehaviour:
   title: 
   requirements: []
   level: 0
-  editMaterial: {fileID: 2100000, guid: 4b3479d81d352b54da77ace280279730, type: 2}
+  self: {fileID: 197813528284855482}
   done: 0
   resources: []
   evidence: 
+  group: {fileID: 0}
 --- !u!1001 &1987738431575365594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61,11 +62,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 412651711456060046, guid: 4cae22e38057ee747b22bcc85df8cdea,
-        type: 3}
-      propertyPath: detailsText
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2049895949138837090, guid: 4cae22e38057ee747b22bcc85df8cdea,
         type: 3}
@@ -126,6 +122,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052687802149803848, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4236787668023386410, guid: 4cae22e38057ee747b22bcc85df8cdea,
         type: 3}
@@ -211,6 +212,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591100504651437430, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889359092351326540, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3048296086014365484}
+    - target: {fileID: 8889359092351326540, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Delete
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cae22e38057ee747b22bcc85df8cdea, type: 3}

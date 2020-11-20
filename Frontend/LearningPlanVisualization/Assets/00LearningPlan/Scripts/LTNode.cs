@@ -15,11 +15,13 @@ abstract public class LTNode : MonoBehaviour
     public List<LTNode> requirements;
     public LTStatus status { get; protected set; }
     public int level;
+    public GameObject self;
     protected LTNodeVisualizer visualizer;
     protected Visibility visibility;
     float clickTime;
     ManipulationHandler manipulationHandler;
     Transform noTransform;
+
 
     public delegate void ChangePosition();
     public event ChangePosition OnChangePosition;
@@ -30,6 +32,7 @@ abstract public class LTNode : MonoBehaviour
         LTMainMenu.instance.OnChangeEditMode += HandleChangeEditMode;
         manipulationHandler = GetComponent<ManipulationHandler>();
         noTransform = manipulationHandler.HostTransform;
+        HandleChangeEditMode(LTMainMenu.instance.editMode);
     }
 
     virtual public void HandleChangeEditMode(bool editMode)
@@ -108,26 +111,6 @@ abstract public class LTNode : MonoBehaviour
 
     abstract public void RepositionRequirements(float margin);
 
-    public List<LTAction> GetAllRequirements()
-    {
-        List<LTAction> returnList = new List<LTAction>();
-        List<LTAction> candidates;
-        if (requirements.Count == 0) return returnList;
-        foreach(var requirement in requirements)
-        {
-            if (requirement.GetType() == typeof(LTAction))
-            {
-                candidates = requirement.GetAllRequirements();
-                foreach(var candidate in candidates)
-                {
-                    if (!returnList.Contains(candidate)) returnList.Add(candidate);
-                }
-                if (!returnList.Contains(requirement)) returnList.Add(requirement as LTAction);
-            }
-        }
-        return returnList;
-    }
-
     void Update()
     {
         if (transform.hasChanged)
@@ -136,5 +119,34 @@ abstract public class LTNode : MonoBehaviour
             OnChangePosition?.Invoke();
         }
         UpdateStatus();
+    }
+
+    public List<LTConnection> GetAllConnections()
+    {
+        List<LTConnection> allConnections = new List<LTConnection>();
+        foreach (var item in LTMainMenu.instance.connectionSpawner.SpawnedInstances)
+        {
+            var connection = item.GetComponent<LTConnection>();
+            if (this == connection.start || this == connection.end)
+            {
+                allConnections.Add(connection);
+            }
+        }
+        return allConnections;
+    }
+
+    virtual public void Delete()
+    {
+        var allConnections = GetAllConnections();
+        foreach (var connection in allConnections)
+        {
+            connection.Delete();
+        }
+        Destroy(self);
+    }
+
+    private void OnDestroy()
+    {
+        LTMainMenu.instance.OnChangeEditMode -= HandleChangeEditMode;
     }
 }

@@ -15,8 +15,8 @@ public class LTNodeVisualizer : MonoBehaviour
     public GameObject titlePlate;
     public GameObject detailsPlate;
 
-    TextMeshPro titleText;
-    TextMeshPro detailsText;
+    public TextMeshPro titleText;
+    public TextMeshPro detailsText;
     bool detailsVisible = false;
     LTStatus status;
 
@@ -43,8 +43,6 @@ public class LTNodeVisualizer : MonoBehaviour
 
     void Awake()
     {
-        titleText = titlePlate.GetComponentInChildren<TextMeshPro>();
-        detailsText = detailsPlate.GetComponentInChildren<TextMeshPro>();
         node = GetComponent<LTNode>();
     }
 

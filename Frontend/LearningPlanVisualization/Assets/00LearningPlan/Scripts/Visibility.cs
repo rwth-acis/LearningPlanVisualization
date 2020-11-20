@@ -6,6 +6,7 @@ public class Visibility : MonoBehaviour
 {
     private bool visible = true;
     private bool requirementsVisible = true;
+    private Vector3 storedLocalScale = Vector3.one;
 
     public bool Visible
     {
@@ -13,7 +14,8 @@ public class Visibility : MonoBehaviour
         set
         {
             visible = value;
-            if (visible) transform.localScale = Vector3.one;
+            if (transform.localScale != Vector3.zero) storedLocalScale = transform.localScale;
+            if (visible) transform.localScale = storedLocalScale;
             else transform.localScale = Vector3.zero;
             RequirementsVisible = visible;
         }

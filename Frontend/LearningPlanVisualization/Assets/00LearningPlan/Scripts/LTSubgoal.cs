@@ -6,13 +6,13 @@ public class LTSubgoal : LTNode
 {
     public int neededActions { get; private set; }
     public int doneActions { get; private set; }
-    public List<LTAction> actions { get; private set; }
 
     public override void NodeClicked()
     {
 
         base.NodeClicked();
-        visibility.RequirementsVisible = !visibility.RequirementsVisible;
+        if (visibility.RequirementsVisible) visibility.RequirementsVisible = false;
+        else visibility.RequirementsVisible = true;
     }
 
     override public void RepositionRequirements(float margin)
@@ -57,7 +57,7 @@ public class LTSubgoal : LTNode
 
     public void UpdateActions()
     {
-        actions = GetAllRequirements();
+        var actions = GetAllRequiredActions();
         neededActions = 0;
         doneActions = 0;
         foreach(var action in actions)
@@ -65,6 +65,18 @@ public class LTSubgoal : LTNode
             neededActions++;
             if (action.done) doneActions++;
         }
+    }
+
+    public List<LTAction> GetAllRequiredActions()
+    {
+        List<LTAction> returnList = new List<LTAction>();
+
+        foreach (var item in LTMainMenu.instance.actionSpawner.SpawnedInstances)
+        {
+            var action = item.GetComponentInChildren<LTAction>();
+            if (action.group == this) returnList.Add(action);
+        }
+        return returnList;
     }
 
     override public void UpdateStatus()
@@ -92,5 +104,15 @@ public class LTSubgoal : LTNode
     {
         visualizer = GetComponent<LTNodeVisualizer>();
         visibility = GetComponent<Visibility>();
+    }
+
+    public override void Delete()
+    {
+        var actions = GetAllRequiredActions();
+        foreach (var action in actions)
+        {
+            action.Delete();
+        }
+        base.Delete();
     }
 }

@@ -12,16 +12,12 @@ public class ChangeMaterialOnEdit : MonoBehaviour
     {
         LTMainMenu.instance.OnChangeEditMode += HandleChangeEditMode;
         normalMaterial = meshRenderer.material;
+        HandleChangeEditMode(LTMainMenu.instance.editMode);
     }
 
     public void HandleChangeEditMode(bool editMode)
     {
         if (editMode) meshRenderer.material = editMaterial;
         else meshRenderer.material = normalMaterial;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

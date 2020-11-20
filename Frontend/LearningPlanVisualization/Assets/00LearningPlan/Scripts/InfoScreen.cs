@@ -19,40 +19,65 @@ public class InfoScreen : MonoBehaviour
     }
     private int numberOfSteps = System.Enum.GetValues(typeof(InfoScreenStep)).Length;
 
-    public TextMeshProUGUI input;
+    public TMP_InputField input;
     public TextMeshProUGUI placeholder;
+    public GameObject inputField;
     public delegate void ChangeInfoScreenStep(InfoScreenStep newStep);
     public event ChangeInfoScreenStep OnChangeInfoScreenStep;
+
+    public GameObject functionButton;
+
+    private int activeSubgoal;
+
+    private void Awake()
+    {
+        OnChangeInfoScreenStep += HandleChangeInfosScreenStep;
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
         Step = InfoScreenStep.DefineGoal;
-        OnChangeInfoScreenStep += HandleChangeInfosScreenStep;
     }
 
     private void HandleChangeInfosScreenStep(InfoScreenStep newStep)
     {
         //clear input field
+        input.text = "";
 
+
+        print("Step: " + step);
         switch (newStep)
         {
             case InfoScreenStep.DefineGoal:
+                functionButton.SetActive(false);
+                inputField.SetActive(true);
                 setDefineGoalText();
                 break;
             case InfoScreenStep.DefineSubgoals:
+                functionButton.SetActive(true);
+                inputField.SetActive(true);
                 SetDefineSubgoalsText();
                 break;
             case InfoScreenStep.PlaceSubgoals:
+                functionButton.SetActive(false);
+                inputField.SetActive(false);
+
                 SetPlaceSubgoalsText();
                 break;
             case InfoScreenStep.SpecifySubgoal:
-                SetSpecifySubGoalText("Dummy Subgoal");
+                functionButton.SetActive(true);
+                inputField.SetActive(true);
+                SetSpecifySubGoalText(LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>().title);
                 break;
             case InfoScreenStep.PlaceActivites:
-                SetPlaceActivitiesText("Dummy Subgoal");
+                functionButton.SetActive(false);
+                inputField.SetActive(false);
+                SetPlaceActivitiesText(LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>().title);
                 break;
             case InfoScreenStep.SpecifyActions:
+                functionButton.SetActive(false);
+                inputField.SetActive(false);
                 SetSpecifyActionsText();
                 break;
             default:
@@ -61,7 +86,7 @@ public class InfoScreen : MonoBehaviour
 
     }
 
-    public void BtnFunktionClicked()
+    public void BtnFunctionClicked()
     {
         if (placeholder.enabled) return;
         switch (Step)
@@ -69,10 +94,16 @@ public class InfoScreen : MonoBehaviour
             case InfoScreenStep.DefineGoal:
                 break;
             case InfoScreenStep.DefineSubgoals:
+                LTMainMenu.instance.subgoalSpawner.Spawn();
+                var subgoal = LTMainMenu.instance.subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
+                subgoal.Create(input.text, Vector3.zero);
                 break;
             case InfoScreenStep.PlaceSubgoals:
                 break;
             case InfoScreenStep.SpecifySubgoal:
+                LTMainMenu.instance.actionSpawner.Spawn();
+                var action = LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
+                action.Create(input.text, Vector3.zero, LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>());
                 break;
             case InfoScreenStep.PlaceActivites:
                 break;
@@ -85,26 +116,36 @@ public class InfoScreen : MonoBehaviour
 
     public void BtnNextClicked()
     {
-        if (placeholder.enabled) return;
+        int nextStep = (int)Step;
         switch (Step)
         {
             case InfoScreenStep.DefineGoal:
+                if (placeholder.enabled) return;
+                LTMainMenu.instance.goalSpawner.Spawn();
+                var goal = LTMainMenu.instance.goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
+                goal.Create(input.text, Vector3.zero);
                 break;
             case InfoScreenStep.DefineSubgoals:
                 break;
             case InfoScreenStep.PlaceSubgoals:
+                if (LTMainMenu.instance.subgoalSpawner.SpawnedInstances.Length == 0) return;
                 break;
             case InfoScreenStep.SpecifySubgoal:
                 break;
             case InfoScreenStep.PlaceActivites:
+                activeSubgoal++;
+                if (activeSubgoal < LTMainMenu.instance.subgoalSpawner.SpawnedInstances.Length)
+                    nextStep = nextStep - 2;
+                else
+                    activeSubgoal = 0;
                 break;
             case InfoScreenStep.SpecifyActions:
                 break;
             default:
                 break;
         }
+        nextStep = (nextStep + 1) % numberOfSteps;
 
-        int nextStep = ((int)Step + 1) % numberOfSteps;
         Step = (InfoScreenStep)nextStep;
     }
 
@@ -165,5 +206,11 @@ public class InfoScreen : MonoBehaviour
         infoString += "\n<i><size=90%><indent=2em>E.g.:</indent><indent=5em>4 days</indent></size></i>";
         infoString += "</indent>";
         text.text = infoString;
+    }
+
+
+    private void OnDestroy()
+    {
+        OnChangeInfoScreenStep += HandleChangeInfosScreenStep;
     }
 }

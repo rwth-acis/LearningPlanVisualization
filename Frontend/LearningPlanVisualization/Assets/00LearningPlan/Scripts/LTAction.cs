@@ -9,6 +9,7 @@ public class LTAction : LTNode
     public List<string> resources;
     public string evidence;
     public TimeSpan time = TimeSpan.Zero;
+    public LTSubgoal group;
 
     override public void BtnDoneClicked()
     {
@@ -51,14 +52,20 @@ public class LTAction : LTNode
     {
         visualizer.DetailsVisible = !visualizer.DetailsVisible;
     }
+    public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup)
+    {
+        Create(newTitle, newPosition, newGroup, false, new List<string>(), "", new TimeSpan());
+    }
 
-    public void Create(string newTitle, Vector3 newPosition, bool newDone, List<string> newResources, string newEvidence, TimeSpan newTime)
+    public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup, bool newDone, List<string> newResources, string newEvidence, TimeSpan newTime)
     {
         Create(newTitle, newPosition);
+        group = newGroup;
         done = newDone;
         resources = newResources;
         evidence = newEvidence;
         time = newTime;
+
     }
 
     // Start is called before the first frame update
@@ -67,7 +74,7 @@ public class LTAction : LTNode
         visualizer = GetComponent<LTNodeVisualizer>();
         visibility = GetComponent<Visibility>();
     }
-    
+
     override public void UpdateStatus()
     {
         if (done) status = LTStatus.Done;
