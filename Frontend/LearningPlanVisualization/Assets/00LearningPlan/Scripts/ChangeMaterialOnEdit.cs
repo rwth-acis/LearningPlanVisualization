@@ -20,4 +20,8 @@ public class ChangeMaterialOnEdit : MonoBehaviour
         if (editMode) meshRenderer.material = editMaterial;
         else meshRenderer.material = normalMaterial;
     }
+    private void OnDestroy()
+    {
+        LTMainMenu.instance.OnChangeEditMode -= HandleChangeEditMode;
+    }
 }

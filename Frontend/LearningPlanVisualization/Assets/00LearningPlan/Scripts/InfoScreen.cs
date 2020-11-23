@@ -169,8 +169,8 @@ public class InfoScreen : MonoBehaviour
     {
         string infoString = "";
         infoString += "Most of the subgoals will have the completion of other subgoals as a <b>precondition</b>.";
-        infoString += "\nTake the different nodes <b>out of your tash and place them on the floor</b>, in an order that seems logical for you, beginning with the main goal.";
-        infoString += "\nYou can also add preconditions for allready placed nodes.";
+        infoString += "\nRearrange the different nodes <b>on the floor</b>, in an order that seems logical for you, beginning with the main goal.";
+        infoString += "\nYou can also add preconditions for allready placed nodes by clicking \"connect\".";
         infoString += "\n<i><size=90%>E.g.: <indent=3em>Juggling <- Clubs <- Balls</indent></size></i>";
         infoString += "\n<i><size=90%><indent=3em>Juggling <- Rings <- Balls</indent></size></i>";
         text.text = infoString;
@@ -189,7 +189,7 @@ public class InfoScreen : MonoBehaviour
     void SetPlaceActivitiesText(string subgoalName)
     {
         string infoString = "";
-        infoString += "Now please take those <b>activities out of your stash and place them on top of the subgoal <u>" + subgoalName + "</u></b>, in the same way you considered the preconditions for subgoals.";
+        infoString += "Now please rearrange those <b>activities and place them on top of the subgoal <u>" + subgoalName + "</u></b>, in the same way you considered the preconditions for subgoals.";
         text.text = infoString;
     }
 
