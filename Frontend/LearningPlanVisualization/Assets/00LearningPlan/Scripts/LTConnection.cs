@@ -6,12 +6,11 @@ public class LTConnection : MonoBehaviour
 {
     public LTNode start;
     public LTNode end;
-    public GameObject deleteButton;
     public GameObject cylinder;
     public GameObject self;
     private Vector3 startPosition;
     private Vector3 endPosition;
-    private Renderer renderer;
+    public Renderer mainRenderer;
     private Visibility startVisibility;
     private Visibility endVisibility;
     private bool visible = false;
@@ -25,7 +24,6 @@ public class LTConnection : MonoBehaviour
         end = newEnd;
         startVisibility = start.GetComponent<Visibility>();
         endVisibility = end.GetComponent<Visibility>();
-        renderer = GetComponentInChildren<Renderer>();
 
         start.OnChangePosition += HandleChangePosition;
         end.OnChangePosition += HandleChangePosition;
@@ -39,7 +37,7 @@ public class LTConnection : MonoBehaviour
         cylinder.transform.up = endPosition - startPosition;
         transform.position = (endPosition + startPosition) * 0.5f;
         length = Vector3.Magnitude(endPosition - startPosition);
-        renderer.material.mainTextureScale = new Vector2(3f, length);
+        mainRenderer.material.mainTextureScale = new Vector2(3f, length);
         cylinder.transform.localScale = new Vector3(1, length, 1);
     }
 

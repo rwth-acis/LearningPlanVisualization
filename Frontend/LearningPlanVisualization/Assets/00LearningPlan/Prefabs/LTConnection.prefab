@@ -127,6 +127,7 @@ MonoBehaviour:
   deleteButton: {fileID: 0}
   cylinder: {fileID: 6891426501403723680}
   self: {fileID: 3940317451429139093}
+  mainRenderer: {fileID: 7201423585090624589}
 --- !u!1 &6891426501403723680
 GameObject:
   m_ObjectHideFlags: 0
