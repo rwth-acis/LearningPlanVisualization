@@ -7,7 +7,6 @@ public class LTConnection : MonoBehaviour
     public LTNode start;
     public LTNode end;
     public GameObject cylinder;
-    public GameObject self;
     private Vector3 startPosition;
     private Vector3 endPosition;
     public Renderer mainRenderer;
@@ -37,8 +36,8 @@ public class LTConnection : MonoBehaviour
         cylinder.transform.up = endPosition - startPosition;
         transform.position = (endPosition + startPosition) * 0.5f;
         length = Vector3.Magnitude(endPosition - startPosition);
-        mainRenderer.material.mainTextureScale = new Vector2(3f, length);
-        cylinder.transform.localScale = new Vector3(1, length, 1);
+        mainRenderer.material.mainTextureScale = new Vector2(2f, 3f * length);
+        cylinder.transform.localScale = new Vector3(1, length,1);
     }
 
     void Update()
@@ -65,7 +64,7 @@ public class LTConnection : MonoBehaviour
     {
         start.requirements.Remove(end);
         start.GetComponentInParent<LTNodeVisualizer>().MaterialUpdate();
-        Destroy(self);
+        Destroy(gameObject);
     }
     private void OnDestroy()
     {

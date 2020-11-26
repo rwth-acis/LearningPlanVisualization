@@ -102,22 +102,22 @@ public class LTMainMenu : MonoBehaviour
         dummyResources.Add("And a Third");
         dummyResources.Add("Last One");
 
-        goal.Create("Juggling", new Vector3(0, 0, 5));
-        subgoalClubs.Create("Clubs", new Vector3(-1.5f, 0, 3.5f));
-        subgoalRings.Create("Rings", new Vector3(1.5f, 0, 3.5f));
-        subgoalBalls.Create("Balls", new Vector3(0, 0, 2));
-        ball5.Create("5 Balls", new Vector3(0, 1, 2), subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ball3.Create("3 Balls", new Vector3(1, 2, 2), subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ball2.Create("2 Balls", new Vector3(-1, 2, 2), subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ball1.Create("1 Ball", new Vector3(0, 3, 2), subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring5.Create("5 Rings", new Vector3(1.5f, 1, 3.5f), subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring3.Create("3 Rings", new Vector3(2.5f, 2, 3.5f), subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring2.Create("2 Rings", new Vector3(0.5f, 2, 3.5f), subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring1.Create("1 Ring", new Vector3(1.5f, 3, 3.5f), subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        clubBurn.Create("Burning Clubs", new Vector3(-2.5f, 1, 3.5f), subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        club3.Create("3 Clubs", new Vector3(-0.5f, 1, 3.5f), subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        club2.Create("2 Clubs", new Vector3(-0.5f, 2, 3.5f), subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        club1.Create("1 Clubs", new Vector3(-0.5f, 3, 3.5f), subgoalClubs, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        goal.Create("Juggling");
+        subgoalClubs.Create("Clubs");
+        subgoalRings.Create("Rings");
+        subgoalBalls.Create("Balls");
+        ball5.Create("5 Balls", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ball3.Create("3 Balls", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ball2.Create("2 Balls", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ball1.Create("1 Ball", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ring5.Create("5 Rings", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ring3.Create("3 Rings", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ring2.Create("2 Rings", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        ring1.Create("1 Ring", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        clubBurn.Create("Burning Clubs", Vector3.zero, subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        club3.Create("3 Clubs", Vector3.zero, subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        club2.Create("2 Clubs", Vector3.zero, subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+        club1.Create("1 Clubs", Vector3.zero, subgoalClubs, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
 
         NewConnection(goal, subgoalClubs);
         NewConnection(goal, subgoalRings);
@@ -147,6 +147,7 @@ public class LTMainMenu : MonoBehaviour
         {
             start.GetComponentInChildren<LTSubgoal>().UpdateActions();
         }
+        RepositionTree();
     }
 
     public void ChangeGoalMesh()
@@ -161,7 +162,7 @@ public class LTMainMenu : MonoBehaviour
         var goal = goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
         goal.ResetLevel();
         goal.CalculateLevel(-1);
-        goal.RepositionRequirements(1.5f);
+        goal.RepositionRequirements(0.2f);
     }
 
     public void SwitchEditMode()

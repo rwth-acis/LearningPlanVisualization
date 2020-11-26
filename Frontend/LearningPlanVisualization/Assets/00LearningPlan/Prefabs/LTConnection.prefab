@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3035207697728310909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.5, z: 0.1}
+  m_LocalScale: {x: 0.01, y: 0.5, z: 0.01}
   m_Children: []
   m_Father: {fileID: 8856775040591668148}
   m_RootOrder: 0
@@ -124,9 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 0}
   end: {fileID: 0}
-  deleteButton: {fileID: 0}
   cylinder: {fileID: 6891426501403723680}
-  self: {fileID: 3940317451429139093}
   mainRenderer: {fileID: 7201423585090624589}
 --- !u!1 &6891426501403723680
 GameObject:
@@ -243,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 7471835662809876592, guid: a20a4639892c45643b1e6479e472a49f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.15
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7471835662809876592, guid: a20a4639892c45643b1e6479e472a49f,
         type: 3}
@@ -288,12 +286,17 @@ PrefabInstance:
     - target: {fileID: 7471835662809876592, guid: a20a4639892c45643b1e6479e472a49f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7471835662809876592, guid: a20a4639892c45643b1e6479e472a49f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471835662809876592, guid: a20a4639892c45643b1e6479e472a49f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a20a4639892c45643b1e6479e472a49f, type: 3}

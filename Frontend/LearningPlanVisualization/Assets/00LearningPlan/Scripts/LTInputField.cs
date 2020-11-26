@@ -20,7 +20,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         }
         public void OnPointerDown(PointerEventData eventData)
         {
-            keyboard.RepositionKeyboard(transform, aCollider,0.5f);
+            keyboard.RepositionKeyboard(transform, aCollider,0.2f);
             keyboard.PresentKeyboard();
 
             keyboard.OnClosed += DisableKeyboard;

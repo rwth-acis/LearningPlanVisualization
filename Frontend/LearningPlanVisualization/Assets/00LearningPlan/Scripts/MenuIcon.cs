@@ -6,7 +6,7 @@ using UnityEngine;
 public class MenuIcon : MonoBehaviour
 {
     public GameObject menuPlate;
-
+    private Vector3 savedScale;
     bool menuPlateVisible;
     float time;
 
@@ -16,8 +16,8 @@ public class MenuIcon : MonoBehaviour
         set
         {
             menuPlateVisible = value;
-            if (menuPlateVisible) menuPlate.transform.localScale = new Vector3(1, 1, 1);
-            else menuPlate.transform.localScale = new Vector3(0, 0, 0);
+            if (menuPlateVisible) menuPlate.transform.localScale = savedScale;
+            else menuPlate.transform.localScale = Vector3.zero;
         }
     }
 
@@ -36,6 +36,8 @@ public class MenuIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        savedScale = menuPlate.transform.localScale;
         MenuPlateVisible = false;
+
     }
 }
