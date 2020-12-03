@@ -14,6 +14,7 @@ public class LTConnection : MonoBehaviour
     private Visibility endVisibility;
     private bool visible = false;
     private float length;
+    private Vector3 storedLocalScale = Vector3.one;
 
 
     // Start is called before the first frame update
@@ -36,7 +37,7 @@ public class LTConnection : MonoBehaviour
         cylinder.transform.up = endPosition - startPosition;
         transform.position = (endPosition + startPosition) * 0.5f;
         length = Vector3.Magnitude(endPosition - startPosition);
-        mainRenderer.material.mainTextureScale = new Vector2(2f, 3f * length);
+        mainRenderer.material.mainTextureScale = new Vector2(2f, 6f * length);
         cylinder.transform.localScale = new Vector3(1, length,1);
     }
 
@@ -47,7 +48,7 @@ public class LTConnection : MonoBehaviour
             if (!visible)
             {
                 visible = true;
-                transform.localScale = Vector3.one;
+                transform.localScale = storedLocalScale;
             }
         }
         else
@@ -55,6 +56,7 @@ public class LTConnection : MonoBehaviour
             if (visible)
             {
                 visible = false;
+                storedLocalScale = transform.localScale;
                 transform.localScale = Vector3.zero;
             }
         }

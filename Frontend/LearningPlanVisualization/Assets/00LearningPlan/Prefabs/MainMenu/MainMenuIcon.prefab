@@ -173,10 +173,11 @@ MonoBehaviour:
   oneHandRotationModeFar: 6
   releaseBehavior: 3
   constraintOnRotation: 0
+  useLocalSpaceForConstraint: 0
   constraintOnMovement: 0
   smoothingActive: 1
   smoothingAmountOneHandManip: 0.001
-  OnManipulationStarted:
+  onManipulationStarted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114434129881745106}
@@ -190,7 +191,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnManipulationEnded:
+  onManipulationEnded:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114434129881745106}
@@ -204,7 +205,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnHoverEntered:
+  onHoverEntered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
@@ -218,7 +219,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnHoverExited:
+  onHoverExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}

@@ -15,6 +15,7 @@ public class LTMainMenu : MonoBehaviour
     public NonNativeKeyboard keyboard;
     I5Spawner[] nodeSpawner;
     public Mesh newMesh;
+    public float repositionMargin = 0.2f;
 
     public delegate void ChangeEditMode(bool editMode);
     public event ChangeEditMode OnChangeEditMode;
@@ -22,6 +23,9 @@ public class LTMainMenu : MonoBehaviour
 
     public delegate void CreateConnection(LTNode node);
     public event CreateConnection OnCreateConnection;
+
+    public delegate void DestroyGhosts();
+    public event DestroyGhosts OnDestroyGhosts;
 
 
     private GameObject connections;
@@ -78,7 +82,7 @@ public class LTMainMenu : MonoBehaviour
         var ring1 = actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
         actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
 
-        
+
         subgoalSpawner.Spawn();
         var subgoalClubs = subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
 
@@ -96,28 +100,30 @@ public class LTMainMenu : MonoBehaviour
         actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
 
 
-        var dummyResources = new List<string>();
-        dummyResources.Add("Test Resource");
-        dummyResources.Add("Second One");
-        dummyResources.Add("And a Third");
-        dummyResources.Add("Last One");
+        object[] dummyData = { Vector3.zero, subgoalBalls, true, new List<string>(), "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0) };
+
+        ((List<string>)dummyData[3]).Add("Test Resource");
+        ((List<string>)dummyData[3]).Add("Second One");
+        ((List<string>)dummyData[3]).Add("And a Third");
+        ((List<string>)dummyData[3]).Add("Last One");
 
         goal.Create("Juggling");
         subgoalClubs.Create("Clubs");
         subgoalRings.Create("Rings");
         subgoalBalls.Create("Balls");
-        ball5.Create("5 Balls", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ball3.Create("3 Balls", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ball2.Create("2 Balls", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ball1.Create("1 Ball", Vector3.zero, subgoalBalls, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring5.Create("5 Rings", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring3.Create("3 Rings", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring2.Create("2 Rings", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        ring1.Create("1 Ring", Vector3.zero, subgoalRings, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        clubBurn.Create("Burning Clubs", Vector3.zero, subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        club3.Create("3 Clubs", Vector3.zero, subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        club2.Create("2 Clubs", Vector3.zero, subgoalClubs, false, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
-        club1.Create("1 Clubs", Vector3.zero, subgoalClubs, true, dummyResources, "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0));
+
+        ball5.Create("5 Balls", (Vector3)dummyData[0],(LTSubgoal)dummyData[1], (bool)dummyData[2],(List<String>)dummyData[3],(String)dummyData[4],(TimeSpan)dummyData[5]);
+        ball3.Create("3 Balls", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ball2.Create("2 Balls", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ball1.Create("1 Ball", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring5.Create("5 Rings", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring3.Create("3 Rings", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring2.Create("2 Rings", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring1.Create("1 Ring", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        clubBurn.Create("Burning Clubs", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        club3.Create("3 Clubs", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        club2.Create("2 Clubs", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        club1.Create("1 Clubs", (Vector3)dummyData[0], (LTSubgoal)dummyData[1], (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
 
         NewConnection(goal, subgoalClubs);
         NewConnection(goal, subgoalRings);
@@ -162,7 +168,7 @@ public class LTMainMenu : MonoBehaviour
         var goal = goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
         goal.ResetLevel();
         goal.CalculateLevel(-1);
-        goal.RepositionRequirements(0.2f);
+        goal.RepositionRequirements(repositionMargin);
     }
 
     public void SwitchEditMode()
@@ -174,6 +180,11 @@ public class LTMainMenu : MonoBehaviour
     public void InvokeCreateConnection(LTNode node)
     {
         OnCreateConnection?.Invoke(node);
+    }
+
+    public void InvokeDestroyGhosts()
+    {
+        OnDestroyGhosts?.Invoke();
     }
 
     public void NewConnection(LTNode startnode, LTNode endnode)

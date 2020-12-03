@@ -538,16 +538,16 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: VIAProMa
+  metroPackageName: LearningPlanVisualization
   metroPackageVersion: 0.1.0.0
   metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: i5
   metroCertificateIssuer: i5
   metroCertificateNotAfter: 808d9bf9e319d601
-  metroApplicationDescription: VIAProMa
+  metroApplicationDescription: LearningPlanVisualization
   wsaImages: {}
-  metroTileShortName: VIAProMa
+  metroTileShortName: LearningPlanVisualization
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

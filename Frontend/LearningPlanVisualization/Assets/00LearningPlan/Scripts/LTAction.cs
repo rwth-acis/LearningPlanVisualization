@@ -10,7 +10,6 @@ public class LTAction : LTNode
     public string evidence;
     public TimeSpan time = TimeSpan.Zero;
     public LTSubgoal group;
-
     override public void BtnDoneClicked()
     {
         done = !done;
