@@ -36,6 +36,19 @@ public class LTGoal : LTNode
         status = LTStatus.Done;
     }
 
+    override public void UpdateCalendarStatus()
+    {
+        foreach (var node in requirements)
+        {
+            if (!(node.calendarStatus == LTStatus.Done))
+            {
+                calendarStatus = LTStatus.NotAvailable;
+                return;
+            }
+        }
+        calendarStatus = LTStatus.Done;
+    }
+
     public override void Delete()
     {
         foreach (var item in LTMainMenu.instance.subgoalSpawner.SpawnedInstances)

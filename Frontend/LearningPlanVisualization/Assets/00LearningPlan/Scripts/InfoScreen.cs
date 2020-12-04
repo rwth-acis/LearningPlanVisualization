@@ -7,6 +7,7 @@ public enum InfoScreenStep { DefineGoal, DefineSubgoals, PlaceSubgoals, SpecifyS
 public class InfoScreen : MonoBehaviour
 {
     public TextMeshPro text;
+    public Camera cam;
     private InfoScreenStep step;
     public InfoScreenStep Step
     {
@@ -96,14 +97,14 @@ public class InfoScreen : MonoBehaviour
             case InfoScreenStep.DefineSubgoals:
                 LTMainMenu.instance.subgoalSpawner.Spawn();
                 var subgoal = LTMainMenu.instance.subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
-                subgoal.Create(input.text, Vector3.zero);
+                subgoal.Create(input.text, GetSpawnPosition());
                 break;
             case InfoScreenStep.PlaceSubgoals:
                 break;
             case InfoScreenStep.SpecifySubgoal:
                 LTMainMenu.instance.actionSpawner.Spawn();
                 var action = LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
-                action.Create(input.text, Vector3.zero, LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>());
+                action.Create(input.text, GetSpawnPosition(), LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>());
                 break;
             case InfoScreenStep.PlaceActivites:
                 break;
@@ -123,7 +124,7 @@ public class InfoScreen : MonoBehaviour
                 if (placeholder.enabled) return;
                 LTMainMenu.instance.goalSpawner.Spawn();
                 var goal = LTMainMenu.instance.goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
-                goal.Create(input.text, Vector3.zero);
+                goal.Create(input.text, GetSpawnPosition());
                 break;
             case InfoScreenStep.DefineSubgoals:
                 break;
@@ -149,6 +150,10 @@ public class InfoScreen : MonoBehaviour
         Step = (InfoScreenStep)nextStep;
     }
 
+    Vector3 GetSpawnPosition()
+    {
+        return cam.transform.position + cam.transform.forward * 1;
+    }
     void setDefineGoalText()
     {
         string infoString = "";

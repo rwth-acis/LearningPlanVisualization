@@ -100,6 +100,28 @@ public class LTSubgoal : LTNode
         else status = LTStatus.Done;
     }
 
+    override public void UpdateCalendarStatus()
+    {
+        var notDone = false;
+        foreach (var node in requirements)
+        {
+            if (!(node.calendarStatus == LTStatus.Done))
+            {
+                if (node.GetType() == typeof(LTSubgoal))
+                {
+                    calendarStatus = LTStatus.NotAvailable;
+                    return;
+                }
+                else if (node.GetType() == typeof(LTAction))
+                {
+                    notDone = true;
+                }
+            }
+        }
+        if (notDone) calendarStatus = LTStatus.Available;
+        else calendarStatus = LTStatus.Done;
+    }
+
     private void Start()
     {
         visualizer = GetComponent<LTNodeVisualizer>();

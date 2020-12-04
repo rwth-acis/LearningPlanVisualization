@@ -8,16 +8,19 @@ public class CreateConnection : MonoBehaviour
     public List<Renderer> indicatingRenderer;
     public Color indicatingColor;
     private bool possibleConnection;
-    private bool blinkVisible = true;
+    private bool haloVisible = false;
     private List<Color> originalColors = new List<Color>();
     private bool creating = false;
     private LTNode startNode;
+    private Behaviour halo;
     LTNode selfNode;
     // Start is called before the first frame update
     void Start()
     {
         LTMainMenu.instance.OnCreateConnection += HandleCreateConnection;
         selfNode = GetComponent<LTNode>();
+        halo = (Behaviour)GetComponent("Halo");
+        halo.enabled = false;
     }
 
     private void IsPossibleConnection(LTNode node)
@@ -73,11 +76,6 @@ public class CreateConnection : MonoBehaviour
         IsPossibleConnection(node);
         if (possibleConnection)
         {
-            originalColors.Clear();
-            foreach (var renderer in indicatingRenderer)
-            {
-                originalColors.Add(renderer.material.color);
-            }
             InvokeRepeating("Blink", 0, 0.5f);
         }
     }
@@ -87,27 +85,14 @@ public class CreateConnection : MonoBehaviour
         startNode = null;
         creating = false;
         CancelInvoke("Blink");
-        blinkVisible = true;
-        if (possibleConnection)
-        {
-            var index = 0;
-            foreach (var renderer in indicatingRenderer)
-            {
-                renderer.material.color = originalColors[index];
-                index++;
-            }
-        }
+        haloVisible = false;
+        halo.enabled = false;
     }
 
 
     void Blink()
     {
-        blinkVisible = !blinkVisible;
-        var index = 0;
-        foreach (var renderer in indicatingRenderer)
-        {
-            renderer.material.color = blinkVisible ? originalColors[index] : indicatingColor;
-            index++;
-        }
+        haloVisible = !haloVisible;
+        halo.enabled = haloVisible;
     }
 }

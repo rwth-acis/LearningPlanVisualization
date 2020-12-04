@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
-
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class LTCalendar : MonoBehaviour
 {
@@ -33,31 +33,6 @@ public class LTCalendar : MonoBehaviour
         {
             return startDate + action.time;
         }
-
-        public static bool operator == (PlannedEvent first,PlannedEvent second)
-        {
-            return first.Equals(second);
-        }
-
-        public static bool operator !=(PlannedEvent first, PlannedEvent second)
-        {
-            return first != second;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null) return false;
-            PlannedEvent objAsPlannedEvent = obj as PlannedEvent;
-            if (objAsPlannedEvent == null) return false;
-            else return Equals(objAsPlannedEvent);
-        }
-
-        public bool Equals(PlannedEvent other)
-        {
-            if (other == null) return false;
-            return GetAction() == other.GetAction();
-        }
-
     }
 
     List<PlannedEvent> plannedEvents = new List<PlannedEvent>();
@@ -88,6 +63,11 @@ public class LTCalendar : MonoBehaviour
 
     public Material dayStd;
     public Material dayNow;
+    
+
+
+
+
 
     /// <summary>
     /// In start we set the Calendar to the current date
@@ -100,9 +80,39 @@ public class LTCalendar : MonoBehaviour
             for (int i = 0; i < 7; i++)
             {
                 days.Add(week[i]);
+                int counter = w * 7 + i;
+                week[i].GetComponent<Interactable>().OnClick.AddListener(delegate { DayCLicked(counter); });
             }
         }
         UpdateCalendar(DateTime.Now.Year, DateTime.Now.Month);
+    }
+
+
+    void UpdateCalendarStatusOfNodes()
+    {
+        foreach(var spawner in LTMainMenu.instance.nodeSpawner)
+            foreach(var instance in spawner.SpawnedInstances)
+            {
+                instance.GetComponentInChildren<LTNode>().UpdateCalendarStatus();
+            }
+    }
+
+    void ResetCalendarStatusOfNodes()
+    {
+        foreach (var spawner in LTMainMenu.instance.nodeSpawner)
+            foreach (var instance in spawner.SpawnedInstances)
+            {
+                instance.GetComponentInChildren<LTNode>().calendarStatus = LTStatus.NotAvailable;
+            }
+    }
+
+    void CalenderTillDay(DateTime date)
+    {
+        ResetCalendarStatusOfNodes();
+        foreach(PlannedEvent plannedEvent in plannedEvents)
+        {
+            if (plannedEvent.GetEndDate() < date) plannedEvent.GetAction().calendarStatus = LTStatus.Done;
+        }
     }
 
     /// <summary>
@@ -125,7 +135,7 @@ public class LTCalendar : MonoBehaviour
             if (i < startDay)
             {
                 days[i].UpdateMaterial(null);
-                days[i].UpdateDay(endDayLastMonth+ i - startDay);
+                days[i].UpdateDay(endDayLastMonth + i - startDay);
             }
             else if (i - startDay >= endDay)
             {
@@ -143,13 +153,13 @@ public class LTCalendar : MonoBehaviour
         foreach(PlannedEvent plannedEvent in plannedEvents)
         {
             var tempDate = plannedEvent.GetStartDate();
-            while (tempDate.Day <= plannedEvent.GetEndDate().Day)
+            while (tempDate.Date < plannedEvent.GetEndDate().Date)
             {
-                if ((tempDate.Day > firstOfMonth.AddDays(-startDay).Day) && (tempDate.Day < firstOfMonth.AddDays(42 - startDay).Day))
+                if (tempDate.Year == firstOfMonth.Year && tempDate.Month == firstOfMonth.Month)
                 {
                     days[tempDate.Day - 1 + startDay].UpdatePlannedEvent(plannedEvent.GetAction().name);
                 }
-                tempDate.AddDays(1);
+                tempDate = tempDate.AddDays(1);
             }
 
 
@@ -203,7 +213,21 @@ public class LTCalendar : MonoBehaviour
     public void AddEvent(LTAction action, DateTime startDate)
     {
         PlannedEvent temp = new PlannedEvent(action, startDate);
-        plannedEvents.Remove(temp);
+        plannedEvents.RemoveAll(x => x.GetAction().name == action.name);
         plannedEvents.Add(temp);
+        action.calendarStatus = LTStatus.Done;
+        UpdateCalendarStatusOfNodes();
+    }
+
+    public void AddDummyEvent(DateTime dateTime)
+    {
+        AddEvent(LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>(), dateTime);
+        UpdateCalendar(currDate.Year, currDate.Month);
+    }
+
+    public void DayCLicked(int id)
+    {
+        print(id);
+        AddDummyEvent(currDate.AddDays(id - GetMonthStartDay(currDate.Year, currDate.Month)));
     }
 }

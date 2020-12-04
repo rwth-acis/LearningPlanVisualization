@@ -77,6 +77,7 @@ public class LTAction : LTNode
     override public void UpdateStatus()
     {
         if (done) status = LTStatus.Done;
+        else if (group.status == LTStatus.NotAvailable) status = LTStatus.NotAvailable;
         else
         {
             foreach (var node in requirements)
@@ -88,6 +89,24 @@ public class LTAction : LTNode
                 }
             }
             status = LTStatus.Available;
+        }
+    }
+
+    override public void UpdateCalendarStatus()
+    {
+        if (calendarStatus == LTStatus.Done) return;
+        if (group.calendarStatus == LTStatus.NotAvailable) calendarStatus = LTStatus.NotAvailable;
+        else
+        {
+            foreach (var node in requirements)
+            {
+                if (!(node.calendarStatus == LTStatus.Done))
+                {
+                    calendarStatus = LTStatus.NotAvailable;
+                    return;
+                }
+            }
+            calendarStatus = LTStatus.Available;
         }
     }
 }

@@ -13,7 +13,8 @@ abstract public class LTNode : MonoBehaviour
 {
     public string title;
     public List<LTNode> requirements;
-    public LTStatus status { get; protected set; }
+    public LTStatus status=LTStatus.NotAvailable;
+    public LTStatus calendarStatus = LTStatus.NotAvailable;
     public int level;
     public GameObject self;
     protected LTNodeVisualizer visualizer;
@@ -78,6 +79,9 @@ abstract public class LTNode : MonoBehaviour
     }
 
     virtual public void UpdateStatus()
+    {
+    }
+    virtual public void UpdateCalendarStatus()
     {
     }
 

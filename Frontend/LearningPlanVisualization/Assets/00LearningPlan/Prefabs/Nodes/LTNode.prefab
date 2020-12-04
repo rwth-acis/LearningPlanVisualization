@@ -1074,6 +1074,7 @@ GameObject:
   - component: {fileID: 125720022245361635}
   - component: {fileID: 4860485124833559958}
   - component: {fileID: 6073824441889582201}
+  - component: {fileID: 7663965351275142237}
   m_Layer: 0
   m_Name: LTNode
   m_TagString: Untagged
@@ -1219,6 +1220,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostNode: {fileID: 6330818726051567734, guid: 0b09485bef4f3ec48ac921100a6fb227,
     type: 3}
+--- !u!122 &7663965351275142237
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624808711361905208}
+  m_Enabled: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4286611584
+  m_Size: 0.1
 --- !u!1 &5529939717299845353
 GameObject:
   m_ObjectHideFlags: 0
