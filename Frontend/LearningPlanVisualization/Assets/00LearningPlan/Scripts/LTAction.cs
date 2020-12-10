@@ -67,12 +67,6 @@ public class LTAction : LTNode
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        visualizer = GetComponent<LTNodeVisualizer>();
-        visibility = GetComponent<Visibility>();
-    }
 
     override public void UpdateStatus()
     {
@@ -108,5 +102,51 @@ public class LTAction : LTNode
             }
             calendarStatus = LTStatus.Available;
         }
+    }
+
+    public override void HandleChangeMode(LTModes oldMode, LTModes newMode)
+    {
+        switch (oldMode)
+        {
+            case LTModes.Normal:
+                break;
+            case LTModes.CreateConnection:
+                break;
+            case LTModes.CreateGhost:
+                break;
+            case LTModes.AddToCalendar:
+                EndAddToCalendar();
+                break;
+            default:
+                break;
+        }
+        switch (newMode)
+        {
+            case LTModes.Normal:
+                break;
+            case LTModes.CreateConnection:
+                break;
+            case LTModes.CreateGhost:
+                break;
+            case LTModes.AddToCalendar:
+                BeginAddToCalendar();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void BeginAddToCalendar()
+    {
+        if (calendarStatus == LTStatus.Available)
+        {
+            group.SetExpanded(true);
+            addToCalendarSphere.SetActive(true);
+        }
+    }
+
+    private void EndAddToCalendar()
+    {
+        addToCalendarSphere.SetActive(false);
     }
 }

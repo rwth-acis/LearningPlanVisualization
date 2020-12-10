@@ -17,6 +17,7 @@ abstract public class LTNode : MonoBehaviour
     public LTStatus calendarStatus = LTStatus.NotAvailable;
     public int level;
     public GameObject self;
+    public GameObject addToCalendarSphere;
     protected LTNodeVisualizer visualizer;
     protected Visibility visibility;
     float clickTime;
@@ -31,9 +32,13 @@ abstract public class LTNode : MonoBehaviour
     private void Awake()
     {
         LTMainMenu.instance.OnChangeEditMode += HandleChangeEditMode;
+        LTMainMenu.instance.OnChangeMode += HandleChangeMode;
         manipulationHandler = GetComponent<ManipulationHandler>();
         noTransform = manipulationHandler.HostTransform;
         HandleChangeEditMode(LTMainMenu.instance.editMode);
+        addToCalendarSphere.SetActive(false);
+        visualizer = GetComponent<LTNodeVisualizer>();
+        visibility = GetComponent<Visibility>();
     }
 
     virtual public void HandleChangeEditMode(bool editMode)
@@ -82,6 +87,9 @@ abstract public class LTNode : MonoBehaviour
     {
     }
     virtual public void UpdateCalendarStatus()
+    {
+    }
+    virtual public void HandleChangeMode(LTModes oldMode, LTModes newModa)
     {
     }
 

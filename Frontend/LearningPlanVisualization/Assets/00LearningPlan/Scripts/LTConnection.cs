@@ -28,6 +28,18 @@ public class LTConnection : MonoBehaviour
         start.OnChangePosition += HandleChangePosition;
         end.OnChangePosition += HandleChangePosition;
         HandleChangePosition();
+
+        if (startVisibility.Visible && endVisibility.Visible)
+        {
+            visible = true;
+            transform.localScale = storedLocalScale;
+        }
+        else
+        {
+            visible = false;
+            storedLocalScale = transform.localScale;
+            transform.localScale = Vector3.zero;
+        }
     }
 
     void HandleChangePosition()

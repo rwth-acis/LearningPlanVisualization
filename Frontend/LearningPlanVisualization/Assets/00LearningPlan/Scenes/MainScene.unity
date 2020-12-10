@@ -3344,6 +3344,11 @@ PrefabInstance:
       propertyPath: keyboard
       value: 
       objectReference: {fileID: 457091475}
+    - target: {fileID: 572201301514654616, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: calendar
+      value: 
+      objectReference: {fileID: 1708787192}
     - target: {fileID: 1577740160581275288, guid: df7561df267703d42983a036d8ce85ab,
         type: 3}
       propertyPath: m_Mesh

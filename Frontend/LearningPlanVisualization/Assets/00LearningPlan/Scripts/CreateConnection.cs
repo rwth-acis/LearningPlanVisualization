@@ -8,19 +8,21 @@ public class CreateConnection : MonoBehaviour
     public List<Renderer> indicatingRenderer;
     public Color indicatingColor;
     private bool possibleConnection;
-    private bool haloVisible = false;
+    //private bool haloVisible = false;
     private List<Color> originalColors = new List<Color>();
     private bool creating = false;
     private LTNode startNode;
-    private Behaviour halo;
+    //private Behaviour halo;
+    public GameObject createConnectionSphere;
     LTNode selfNode;
     // Start is called before the first frame update
     void Start()
     {
         LTMainMenu.instance.OnCreateConnection += HandleCreateConnection;
         selfNode = GetComponent<LTNode>();
-        halo = (Behaviour)GetComponent("Halo");
-        halo.enabled = false;
+        //halo = (Behaviour)GetComponent("Halo");
+        //halo.enabled = false;
+        createConnectionSphere.SetActive(false);
     }
 
     private void IsPossibleConnection(LTNode node)
@@ -60,7 +62,9 @@ public class CreateConnection : MonoBehaviour
     {
         if (creating)
         {
-            if (possibleConnection)
+            if(startNode==selfNode)
+                LTMainMenu.instance.InvokeCreateConnection(null);
+            else if (possibleConnection)
             {
                 LTMainMenu.instance.NewConnection(startNode,selfNode);
                 LTMainMenu.instance.InvokeCreateConnection(null);
@@ -76,7 +80,9 @@ public class CreateConnection : MonoBehaviour
         IsPossibleConnection(node);
         if (possibleConnection)
         {
-            InvokeRepeating("Blink", 0, 0.5f);
+
+            createConnectionSphere.SetActive(true);
+ //           InvokeRepeating("Blink", 0, 0.5f);
         }
     }
 
@@ -84,15 +90,17 @@ public class CreateConnection : MonoBehaviour
     {
         startNode = null;
         creating = false;
-        CancelInvoke("Blink");
-        haloVisible = false;
-        halo.enabled = false;
+        createConnectionSphere.SetActive(false);
+ //       CancelInvoke("Blink");
+ //       haloVisible = false;
+ //       halo.enabled = false;
     }
 
-
+/*
     void Blink()
     {
         haloVisible = !haloVisible;
         halo.enabled = haloVisible;
     }
+    */
 }

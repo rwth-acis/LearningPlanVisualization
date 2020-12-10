@@ -9,10 +9,8 @@ public class LTSubgoal : LTNode
 
     public override void NodeClicked()
     {
-
         base.NodeClicked();
-        if (visibility.RequirementsVisible) visibility.RequirementsVisible = false;
-        else visibility.RequirementsVisible = true;
+        SetExpanded(!visibility.RequirementsVisible);
     }
 
     override public void RepositionRequirements(float margin)
@@ -122,12 +120,6 @@ public class LTSubgoal : LTNode
         else calendarStatus = LTStatus.Done;
     }
 
-    private void Start()
-    {
-        visualizer = GetComponent<LTNodeVisualizer>();
-        visibility = GetComponent<Visibility>();
-    }
-
     public override void Delete()
     {
         var actions = GetAllRequiredActions();
@@ -136,5 +128,9 @@ public class LTSubgoal : LTNode
             action.Delete();
         }
         base.Delete();
+    }
+    public void SetExpanded(bool value)
+    {
+        visibility.RequirementsVisible = value;
     }
 }

@@ -15,13 +15,6 @@ public class LTGoal : LTNode
             i++;
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        visualizer = GetComponent<LTNodeVisualizer>();
-        visibility = GetComponent<Visibility>();
-    }
     
     override public void UpdateStatus()
     {

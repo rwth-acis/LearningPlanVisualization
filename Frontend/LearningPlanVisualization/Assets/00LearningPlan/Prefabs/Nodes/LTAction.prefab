@@ -45,8 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 
   requirements: []
+  status: 2
+  calendarStatus: 2
   level: 0
   self: {fileID: 197813528284855482}
+  addToCalendarSphere: {fileID: 443456867468244495}
   done: 0
   resources: []
   evidence: 
@@ -122,6 +125,16 @@ PrefabInstance:
         type: 3}
       propertyPath: onManipulationEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199811528336102284, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: node
+      value: 
+      objectReference: {fileID: 3048296086014365484}
+    - target: {fileID: 2448910483691124776, guid: 4cae22e38057ee747b22bcc85df8cdea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3052687802149803848, guid: 4cae22e38057ee747b22bcc85df8cdea,
         type: 3}
@@ -239,6 +252,12 @@ GameObject:
 --- !u!4 &5383687372497414807 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5846638470747389261, guid: 4cae22e38057ee747b22bcc85df8cdea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1987738431575365594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &443456867468244495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2139953340138119637, guid: 4cae22e38057ee747b22bcc85df8cdea,
     type: 3}
   m_PrefabInstance: {fileID: 1987738431575365594}
   m_PrefabAsset: {fileID: 0}

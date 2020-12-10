@@ -5,6 +5,8 @@ using System;
 using I5Spawner = i5.Toolkit.Core.Spawners.Spawner;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
+
+public enum LTModes { Normal, CreateConnection, CreateGhost, AddToCalendar }
 public class LTMainMenu : MonoBehaviour
 {
     public static LTMainMenu instance;
@@ -14,6 +16,7 @@ public class LTMainMenu : MonoBehaviour
     public I5Spawner connectionSpawner;
     public NonNativeKeyboard keyboard;
     public I5Spawner[] nodeSpawner;
+    public LTCalendar calendar;
     public Mesh newMesh;
     public float repositionMargin = 0.2f;
 
@@ -21,11 +24,19 @@ public class LTMainMenu : MonoBehaviour
     public event ChangeEditMode OnChangeEditMode;
     public bool editMode { get; private set; }
 
+    public delegate void ChangeMode(LTModes newMode, LTModes oldMode);
+    public event ChangeMode OnChangeMode;
+    public LTModes mode { get; private set; }
+
+
+
     public delegate void CreateConnection(LTNode node);
     public event CreateConnection OnCreateConnection;
 
     public delegate void DestroyGhosts();
     public event DestroyGhosts OnDestroyGhosts;
+
+
 
 
     private GameObject connections;
@@ -152,6 +163,7 @@ public class LTMainMenu : MonoBehaviour
         foreach (var start in subgoalSpawner.SpawnedInstances)
         {
             start.GetComponentInChildren<LTSubgoal>().UpdateActions();
+            start.GetComponentInChildren<LTSubgoal>().SetExpanded(false);
         }
         RepositionTree();
     }
@@ -177,6 +189,12 @@ public class LTMainMenu : MonoBehaviour
         OnChangeEditMode?.Invoke(editMode);
     }
 
+    public void SwitchMode(LTModes newMode)
+    {
+        OnChangeMode?.Invoke(mode, newMode);
+        mode = newMode;
+    }
+
     public void InvokeCreateConnection(LTNode node)
     {
         OnCreateConnection?.Invoke(node);
@@ -186,7 +204,7 @@ public class LTMainMenu : MonoBehaviour
     {
         OnDestroyGhosts?.Invoke();
     }
-
+    
     public void NewConnection(LTNode startnode, LTNode endnode)
     {
         if(startnode && endnode)

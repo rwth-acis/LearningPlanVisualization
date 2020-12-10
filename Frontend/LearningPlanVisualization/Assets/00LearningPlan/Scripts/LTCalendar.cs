@@ -63,8 +63,8 @@ public class LTCalendar : MonoBehaviour
 
     public Material dayStd;
     public Material dayNow;
-    
 
+    private DateTime lastClickedDay;
 
 
 
@@ -111,8 +111,9 @@ public class LTCalendar : MonoBehaviour
         ResetCalendarStatusOfNodes();
         foreach(PlannedEvent plannedEvent in plannedEvents)
         {
-            if (plannedEvent.GetEndDate() < date) plannedEvent.GetAction().calendarStatus = LTStatus.Done;
+            if (plannedEvent.GetEndDate() <= date) plannedEvent.GetAction().calendarStatus = LTStatus.Done;
         }
+        UpdateCalendarStatusOfNodes();
     }
 
     /// <summary>
@@ -216,18 +217,26 @@ public class LTCalendar : MonoBehaviour
         plannedEvents.RemoveAll(x => x.GetAction().name == action.name);
         plannedEvents.Add(temp);
         action.calendarStatus = LTStatus.Done;
-        UpdateCalendarStatusOfNodes();
+        UpdateCalendar(currDate.Year, currDate.Month);
     }
 
     public void AddDummyEvent(DateTime dateTime)
     {
         AddEvent(LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>(), dateTime);
-        UpdateCalendar(currDate.Year, currDate.Month);
     }
 
     public void DayCLicked(int id)
     {
-        print(id);
-        AddDummyEvent(currDate.AddDays(id - GetMonthStartDay(currDate.Year, currDate.Month)));
+        lastClickedDay = currDate.AddDays(id - GetMonthStartDay(currDate.Year, currDate.Month));
+        CalenderTillDay(lastClickedDay);
+        LTMainMenu.instance.SwitchMode(LTModes.AddToCalendar);
+
+        //AddDummyEvent(currDate.AddDays(id - GetMonthStartDay(currDate.Year, currDate.Month)));
+    }
+
+    public void AddToCalendarButtonClicked(LTAction action)
+    {
+        AddEvent(action, lastClickedDay);
+        LTMainMenu.instance.SwitchMode(LTModes.Normal);
     }
 }
