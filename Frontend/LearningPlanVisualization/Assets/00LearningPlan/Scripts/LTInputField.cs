@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.MixedReality.Toolkit.Utilities;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,16 +13,17 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
     public class LTInputField : MonoBehaviour, IPointerDownHandler
     {
         public BoxCollider aCollider;
-
+        private TMP_InputField outputText;
         private NonNativeKeyboard keyboard = null;
         private void Start()
         {
             keyboard = LTMainMenu.instance.keyboard;
+            outputText = GetComponent<TMP_InputField>();
         }
         public void OnPointerDown(PointerEventData eventData)
         {
-            keyboard.RepositionKeyboard(transform, aCollider,0.2f);
-            keyboard.PresentKeyboard();
+            LTMainMenu.instance.RepositionKeyboard();
+            keyboard.PresentKeyboard(outputText.text);
 
             keyboard.OnClosed += DisableKeyboard;
             keyboard.OnTextSubmitted += DisableKeyboard;
@@ -30,7 +32,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
 
         private void UpdateText(string text)
         {
-            GetComponent<TMP_InputField>().text = text;
+            outputText.text = text;
         }
 
         private void DisableKeyboard(object sender, EventArgs e)

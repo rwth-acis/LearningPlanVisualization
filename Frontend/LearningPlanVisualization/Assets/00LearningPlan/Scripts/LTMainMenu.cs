@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using I5Spawner = i5.Toolkit.Core.Spawners.Spawner;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
-
+using Microsoft.MixedReality.Toolkit.Utilities;
 
 public enum LTModes { Normal, CreateConnection, CreateGhost, AddToCalendar }
 public class LTMainMenu : MonoBehaviour
@@ -19,6 +19,8 @@ public class LTMainMenu : MonoBehaviour
     public LTCalendar calendar;
     public Mesh newMesh;
     public float repositionMargin = 0.2f;
+
+    public List<string> resources = new List<string>();
 
     public delegate void ChangeEditMode(bool editMode);
     public event ChangeEditMode OnChangeEditMode;
@@ -52,6 +54,7 @@ public class LTMainMenu : MonoBehaviour
     {
         OnChangeEditMode?.Invoke(editMode);
         connections = new GameObject("Connections");
+        resources.Add("Toggle Resource");
     }
 
     public void CreateDummyTree()
@@ -111,30 +114,33 @@ public class LTMainMenu : MonoBehaviour
         actionSpawner.MostRecentlySpawnedObject.transform.SetParent(subgoalSpawner.MostRecentlySpawnedObject.transform);
 
 
-        object[] dummyData = { Vector3.zero, subgoalBalls, false, new List<string>(), "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0) };
+        object[] dummyData = { Vector3.zero, subgoalBalls, false, new List<int>(), "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0) };
+        ((List<int>)dummyData[3]).Add(3);
+        ((List<int>)dummyData[3]).Add(1);
+        ((List<int>)dummyData[3]).Add(2);
 
-        ((List<string>)dummyData[3]).Add("Test Resource");
-        ((List<string>)dummyData[3]).Add("Second One");
-        ((List<string>)dummyData[3]).Add("And a Third");
-        ((List<string>)dummyData[3]).Add("Last One");
+        resources.Add("Test Resource");
+        resources.Add("Second One");
+        resources.Add("And a Third");
+        resources.Add("Last One");
 
         goal.Create("Juggling");
         subgoalClubs.Create("Clubs");
         subgoalRings.Create("Rings");
         subgoalBalls.Create("Balls");
 
-        ball5.Create("5 Balls", (Vector3)dummyData[0],subgoalBalls, (bool)dummyData[2],(List<String>)dummyData[3],(String)dummyData[4],(TimeSpan)dummyData[5]);
-        ball3.Create("3 Balls", (Vector3)dummyData[0], subgoalBalls, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        ball2.Create("2 Balls", (Vector3)dummyData[0], subgoalBalls, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        ball1.Create("1 Ball", (Vector3)dummyData[0], subgoalBalls, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        ring5.Create("5 Rings", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        ring3.Create("3 Rings", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        ring2.Create("2 Rings", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        ring1.Create("1 Ring", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        clubBurn.Create("Burning Clubs", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        club3.Create("3 Clubs", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        club2.Create("2 Clubs", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
-        club1.Create("1 Club", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<String>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ball5.Create("5 Balls", (Vector3)dummyData[0],subgoalBalls, (bool)dummyData[2],(List<int>)dummyData[3],(String)dummyData[4],(TimeSpan)dummyData[5]);
+        ball3.Create("3 Balls", (Vector3)dummyData[0], subgoalBalls, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ball2.Create("2 Balls", (Vector3)dummyData[0], subgoalBalls, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ball1.Create("1 Ball", (Vector3)dummyData[0], subgoalBalls, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring5.Create("5 Rings", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring3.Create("3 Rings", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring2.Create("2 Rings", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        ring1.Create("1 Ring", (Vector3)dummyData[0], subgoalRings, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        clubBurn.Create("Burning Clubs", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        club3.Create("3 Clubs", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        club2.Create("2 Clubs", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
+        club1.Create("1 Club", (Vector3)dummyData[0], subgoalClubs, (bool)dummyData[2], (List<int>)dummyData[3], (String)dummyData[4], (TimeSpan)dummyData[5]);
 
         NewConnection(goal, subgoalClubs);
         NewConnection(goal, subgoalRings);
@@ -167,7 +173,10 @@ public class LTMainMenu : MonoBehaviour
         }
         RepositionTree();
     }
-
+    public void RepositionKeyboard()
+    {
+        keyboard.RepositionKeyboard(CameraCache.Main.transform.position + CameraCache.Main.transform.forward * 1f - CameraCache.Main.transform.up * 0.2f);
+    }
     public void ChangeGoalMesh()
     {
         var goal = FindObjectOfType<LTGoal>();

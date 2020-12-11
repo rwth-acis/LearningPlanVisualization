@@ -68,12 +68,12 @@ public class LTGhostConnection : MonoBehaviour
                 var action = actionGameObject.GetComponentInChildren<LTAction>();
                 if(start.GetType() == typeof(LTAction))
                 {
-                    action.Create("Set Name", end.transform.position, (start as LTAction).group, false, new List<string>(), "", TimeSpan.Zero);
+                    action.Create("Set Name", end.transform.position, (start as LTAction).group);
                     actionGameObject.transform.SetParent(start.transform.parent.parent);
                 }
                 else
                 {
-                    action.Create("Set Name", end.transform.position, start as LTSubgoal, false, new List<string>(), "", TimeSpan.Zero);
+                    action.Create("Set Name", end.transform.position, start as LTSubgoal);
                     actionGameObject.transform.SetParent(start.transform.parent);
                 }
                 //Create Connection

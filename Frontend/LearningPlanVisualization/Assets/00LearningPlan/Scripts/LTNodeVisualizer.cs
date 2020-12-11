@@ -17,6 +17,11 @@ public class LTNodeVisualizer : MonoBehaviour
 
     public TextMeshPro titleText;
     public TextMeshPro detailsText;
+    public TextMeshPro detailsTitle;
+    public TextMeshPro detailsResources;
+    public TextMeshPro detailsEvidence;
+    public TMP_Dropdown detailsChangeResources;
+
     bool detailsVisible = false;
     LTStatus status;
 
@@ -26,9 +31,9 @@ public class LTNodeVisualizer : MonoBehaviour
         set
         {
             detailsVisible = value;
+            UpdateContense();
             if (detailsVisible)
             {
-                detailsText.text = node.GetDetailsText();
                 detailsPlate.transform.localScale = new Vector3(1,1,1);
                 titlePlate.transform.localScale = new Vector3(0,0,0);
             }
@@ -49,8 +54,30 @@ public class LTNodeVisualizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       titleText.text = node.GetTitleText();
+        UpdateContense();
         MaterialUpdate();
+        UpdateResources();
+    }
+
+    public void UpdateResources()
+    {
+        detailsChangeResources.ClearOptions();
+        List<string> resources = new List<string>();
+        foreach (var resource in LTMainMenu.instance.resources) { resources.Add(resource); }
+        detailsChangeResources.AddOptions(resources);
+    }
+
+    public void UpdateContense()
+    {
+        titleText.text = node.GetTitleText();
+        if (node.GetType() == typeof(LTAction))
+        {
+            UpdateResources();
+            detailsTitle.text = node.GetTitleText();
+            detailsResources.text = node.GetResourcesText();
+            detailsText.text = node.GetDetailsText();
+            detailsEvidence.text = node.GetEvidenceText();
+        }
     }
 
     public void MaterialUpdate()

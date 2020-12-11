@@ -58,6 +58,21 @@ abstract public class LTNode : MonoBehaviour
     {
         return "NOT IMPLEMENTED";
     }
+
+    virtual public string GetEvidenceText()
+    {
+        return "NOT IMPLEMENTED";
+    }
+
+    virtual public string GetResourcesText()
+    {
+        return "NOT IMPLEMENTED";
+    }
+    virtual public void EditText(LTEditText.EditType editType, string text)
+    {
+
+    }
+
     virtual public void BtnDoneClicked()
     {
         print("BTNDoneClicked");
@@ -160,5 +175,7 @@ abstract public class LTNode : MonoBehaviour
     private void OnDestroy()
     {
         LTMainMenu.instance.OnChangeEditMode -= HandleChangeEditMode;
+
+        LTMainMenu.instance.OnChangeMode -= HandleChangeMode;
     }
 }

@@ -6,10 +6,11 @@ using UnityEngine;
 public class LTAction : LTNode
 {
     public bool done;
-    public List<string> resources;
+    public List<int> resources;
     public string evidence;
     public TimeSpan time = TimeSpan.Zero;
     public LTSubgoal group;
+
     override public void BtnDoneClicked()
     {
         done = !done;
@@ -18,19 +19,42 @@ public class LTAction : LTNode
     override public string GetDetailsText()
     {
         string returnText = "";
-        returnText += "<u><size=140%><align=\"center\">"+title+"</align></size></u>\n\n";
-
+        returnText += "\n\n\n\n\n\n\n\n\n";
+        /*returnText += "<u><size=140%><align=\"center\">"+title+"</align></size></u>\n\n";
         returnText += "Resources:\n";
         returnText += "<indent=2em>";
-        foreach(var resource in resources){ returnText += resource + " | "; }
+        foreach(var resource in resources){ returnText += LTMainMenu.instance.resources[resource] + " | "; }
         returnText += "</indent>\n";
-
         returnText += "Evidence:\n";
         returnText += "<indent=2em>" + evidence + "</indent>\n";
+        */
 
         returnText += "Time:\n";
-        returnText += "<indent=2em>" + time.Days + " Days | " + time.Hours + " Hours | " + time.Minutes + " Minutes</indent>";
+        returnText += "<indent=2em>" + time.Days + " Days </indent>";
         return returnText;
+    }
+
+    public override string GetResourcesText()
+    {
+        string returnText = "";
+        if (resources.Count == 0) return returnText;
+        for(int i = 0; i < LTMainMenu.instance.resources.Count; i++)
+        {
+            if (resources.Contains(i)) { returnText += LTMainMenu.instance.resources[i] + " | "; }
+        }
+        return returnText.Remove(returnText.Length - 3);
+    }
+    public override string GetEvidenceText()
+    {
+        return evidence;
+    }
+
+    public void ToggleResource(int id)
+    {
+        if (id == 0) return;
+        if (resources.Contains(id)) resources.Remove(id);
+        else resources.Add(id);
+        visualizer.UpdateContense();
     }
 
     override public void RepositionRequirements(float margin)
@@ -53,15 +77,18 @@ public class LTAction : LTNode
     }
     public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup)
     {
-        Create(newTitle, newPosition, newGroup, false, new List<string>(), "", new TimeSpan());
+        Create(newTitle, newPosition, newGroup, false, new List<int>(), "", new TimeSpan());
     }
 
-    public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup, bool newDone, List<string> newResources, string newEvidence, TimeSpan newTime)
+    public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup, bool newDone, List<int> newResources, string newEvidence, TimeSpan newTime)
     {
         Create(newTitle, newPosition);
         group = newGroup;
         done = newDone;
-        resources = newResources;
+        foreach(var resource in newResources)
+        {
+            ToggleResource(resource);
+        }
         evidence = newEvidence;
         time = newTime;
 
@@ -86,6 +113,21 @@ public class LTAction : LTNode
         }
     }
 
+    public override void EditText(LTEditText.EditType editType, string text)
+    {
+        switch (editType)
+        {
+            case LTEditText.EditType.Title:
+                title = text;
+                break;
+            case LTEditText.EditType.Evidence:
+                evidence = text;
+                break;
+            default:
+                break;
+        }
+    }
+
     override public void UpdateCalendarStatus()
     {
         if (calendarStatus == LTStatus.Done) return;
@@ -106,6 +148,7 @@ public class LTAction : LTNode
 
     public override void HandleChangeMode(LTModes oldMode, LTModes newMode)
     {
+        visualizer.DetailsVisible = false;
         switch (oldMode)
         {
             case LTModes.Normal:
