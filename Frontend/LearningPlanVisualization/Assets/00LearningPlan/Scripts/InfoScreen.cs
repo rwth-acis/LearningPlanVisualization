@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public enum InfoScreenStep { DefineGoal, DefineSubgoals, PlaceSubgoals, SpecifySubgoal, PlaceActivites, SpecifyActions }
+public enum InfoScreenStep { DefineGoal, DefineSubgoals, PlaceSubgoals, SpecifySubgoal, PlaceActions, SpecifyActions }
 public class InfoScreen : MonoBehaviour
 {
     public TextMeshPro text;
@@ -63,15 +63,15 @@ public class InfoScreen : MonoBehaviour
             case InfoScreenStep.PlaceSubgoals:
                 functionButton.SetActive(false);
                 inputField.SetActive(false);
-
                 SetPlaceSubgoalsText();
+                LTMainMenu.instance.SwitchEditMode(true);
                 break;
             case InfoScreenStep.SpecifySubgoal:
                 functionButton.SetActive(true);
                 inputField.SetActive(true);
                 SetSpecifySubGoalText(LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>().title);
                 break;
-            case InfoScreenStep.PlaceActivites:
+            case InfoScreenStep.PlaceActions:
                 functionButton.SetActive(false);
                 inputField.SetActive(false);
                 SetPlaceActivitiesText(LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>().title);
@@ -106,7 +106,7 @@ public class InfoScreen : MonoBehaviour
                 var action = LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
                 action.Create(input.text, GetSpawnPosition(), LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>());
                 break;
-            case InfoScreenStep.PlaceActivites:
+            case InfoScreenStep.PlaceActions:
                 break;
             case InfoScreenStep.SpecifyActions:
                 break;
@@ -133,7 +133,7 @@ public class InfoScreen : MonoBehaviour
                 break;
             case InfoScreenStep.SpecifySubgoal:
                 break;
-            case InfoScreenStep.PlaceActivites:
+            case InfoScreenStep.PlaceActions:
                 activeSubgoal++;
                 if (activeSubgoal < LTMainMenu.instance.subgoalSpawner.SpawnedInstances.Length)
                     nextStep = nextStep - 2;

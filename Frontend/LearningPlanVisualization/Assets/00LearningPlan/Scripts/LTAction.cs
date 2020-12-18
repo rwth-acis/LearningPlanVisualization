@@ -16,21 +16,10 @@ public class LTAction : LTNode
         done = !done;
     }
 
-    override public string GetDetailsText()
+    public override string GetTimeText()
     {
         string returnText = "";
-        returnText += "\n\n\n\n\n\n\n\n\n";
-        /*returnText += "<u><size=140%><align=\"center\">"+title+"</align></size></u>\n\n";
-        returnText += "Resources:\n";
-        returnText += "<indent=2em>";
-        foreach(var resource in resources){ returnText += LTMainMenu.instance.resources[resource] + " | "; }
-        returnText += "</indent>\n";
-        returnText += "Evidence:\n";
-        returnText += "<indent=2em>" + evidence + "</indent>\n";
-        */
-
-        returnText += "Time:\n";
-        returnText += "<indent=2em>" + time.Days + " Days </indent>";
+        returnText += time.Days + " Days";
         return returnText;
     }
 
@@ -123,9 +112,17 @@ public class LTAction : LTNode
             case LTEditText.EditType.Evidence:
                 evidence = text;
                 break;
+            case LTEditText.EditType.Time:
+                int x;
+                if (int.TryParse(text, out x) && x >= 0)
+                {
+                    time = new TimeSpan(x, 0, 0, 0);
+                }
+                break;
             default:
                 break;
         }
+        visualizer.UpdateContense();
     }
 
     override public void UpdateCalendarStatus()

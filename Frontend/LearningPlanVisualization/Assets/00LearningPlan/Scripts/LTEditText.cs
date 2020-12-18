@@ -8,7 +8,7 @@ using System;
 
 public class LTEditText : MonoBehaviour, IMixedRealityPointerHandler
 {
-    public enum EditType { Title, Evidence }
+    public enum EditType { Title, Evidence, Time }
     public TextMeshPro textField;
     public BoxCollider aCollider;
     public EditType editType;
@@ -23,8 +23,15 @@ public class LTEditText : MonoBehaviour, IMixedRealityPointerHandler
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
         LTMainMenu.instance.RepositionKeyboard();
-        keyboard.PresentKeyboard(textField.text);
-
+        if (editType == EditType.Time)
+        {
+            keyboard.PresentKeyboard(textField.text.Substring(0, textField.text.IndexOf(" ")),NonNativeKeyboard.LayoutType.Symbol);
+        }
+        else
+        {
+            keyboard.PresentKeyboard(textField.text);
+        }
+        
         keyboard.OnClosed += DisableKeyboard;
         keyboard.OnTextSubmitted += DisableKeyboard;
         keyboard.OnTextUpdated += UpdateText;

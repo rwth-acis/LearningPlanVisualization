@@ -54,20 +54,43 @@ abstract public class LTNode : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the corresponding Text When implemented in SubClass
+    /// </summary>
+    /// <returns></returns>
     virtual public string GetDetailsText()
     {
         return "NOT IMPLEMENTED";
     }
 
+    /// <summary>
+    /// Returns the corresponding Text When implemented in SubClass
+    /// </summary>
+    /// <returns></returns>
     virtual public string GetEvidenceText()
     {
         return "NOT IMPLEMENTED";
     }
 
+    /// <summary>
+    /// Returns the corresponding Text When implemented in SubClass
+    /// </summary>
+    /// <returns></returns>
+    virtual public string GetTimeText()
+    {
+        return "NOT IMPLEMENTED";
+    }
+
+    /// <summary>
+    /// Returns the corresponding Text When implemented in SubClass
+    /// </summary>
+    /// <returns></returns>
     virtual public string GetResourcesText()
     {
         return "NOT IMPLEMENTED";
     }
+
+
     virtual public void EditText(LTEditText.EditType editType, string text)
     {
 

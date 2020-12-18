@@ -112,6 +112,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &298435269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5766452063218623890, guid: fd8116e296f625a429a5f9f4804c6729,
+    type: 3}
+  m_PrefabInstance: {fileID: 1863818389}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8742c4872a741e42922e2a7c4c2063b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &304696208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,6 +3369,11 @@ PrefabInstance:
       propertyPath: calendar
       value: 
       objectReference: {fileID: 1708787192}
+    - target: {fileID: 572201301514654616, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: newTreeScreen
+      value: 
+      objectReference: {fileID: 298435269}
     - target: {fileID: 1577740160581275288, guid: df7561df267703d42983a036d8ce85ab,
         type: 3}
       propertyPath: m_Mesh
@@ -3366,6 +3383,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858175336759216691, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858175336759216691, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858175336759216691, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858175336759216691, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858175336759216691, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3168169067913672727, guid: df7561df267703d42983a036d8ce85ab,
         type: 3}
@@ -3481,6 +3523,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105256197887767834, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df7561df267703d42983a036d8ce85ab, type: 3}

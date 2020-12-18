@@ -16,10 +16,10 @@ public class LTNodeVisualizer : MonoBehaviour
     public GameObject detailsPlate;
 
     public TextMeshPro titleText;
-    public TextMeshPro detailsText;
     public TextMeshPro detailsTitle;
     public TextMeshPro detailsResources;
     public TextMeshPro detailsEvidence;
+    public TextMeshPro detailsTime;
     public TMP_Dropdown detailsChangeResources;
 
     bool detailsVisible = false;
@@ -75,8 +75,8 @@ public class LTNodeVisualizer : MonoBehaviour
             UpdateResources();
             detailsTitle.text = node.GetTitleText();
             detailsResources.text = node.GetResourcesText();
-            detailsText.text = node.GetDetailsText();
             detailsEvidence.text = node.GetEvidenceText();
+            detailsTime.text = node.GetTimeText();
         }
     }
 

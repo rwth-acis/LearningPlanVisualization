@@ -228,7 +228,7 @@ Transform:
   m_GameObject: {fileID: 4734403665290045768}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 5617149471824145792}
   - {fileID: 8056127739927686106}
@@ -249,6 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textField: {fileID: 0}
   aCollider: {fileID: 1347863174172212759}
+  editType: 0
+  node: {fileID: 0}
 --- !u!1 &6275683395294590264
 GameObject:
   m_ObjectHideFlags: 0

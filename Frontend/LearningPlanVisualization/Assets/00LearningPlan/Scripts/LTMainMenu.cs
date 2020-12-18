@@ -17,6 +17,7 @@ public class LTMainMenu : MonoBehaviour
     public NonNativeKeyboard keyboard;
     public I5Spawner[] nodeSpawner;
     public LTCalendar calendar;
+    public InfoScreen newTreeScreen;
     public Mesh newMesh;
     public float repositionMargin = 0.2f;
 
@@ -43,6 +44,9 @@ public class LTMainMenu : MonoBehaviour
 
     private GameObject connections;
 
+    private Vector3 calendarScale = new Vector3(0.5f, 0.5f, 1);
+    private Vector3 newTreeScreenScale = new Vector3(0.3f, 0.3f, 0.3f);
+
     private void Awake()
     {
         instance = this;
@@ -55,8 +59,35 @@ public class LTMainMenu : MonoBehaviour
         OnChangeEditMode?.Invoke(editMode);
         connections = new GameObject("Connections");
         resources.Add("Toggle Resource");
+        //Dummyresources
+        resources.Add("Book");
+        resources.Add("Teacher");
+        resources.Add("Seminar");
+        resources.Add("Video");
+
+        ShowClanedar();
+        ShowCreateNewTree();
     }
 
+
+    public void RepositionKeyboard()
+    {
+        keyboard.RepositionKeyboard(CameraCache.Main.transform.position + CameraCache.Main.transform.forward * 1f - CameraCache.Main.transform.up * 0.2f);
+    }
+
+    public void ShowCreateNewTree()
+    {
+        if (newTreeScreen.transform.localScale == Vector3.zero)
+        {
+            newTreeScreen.transform.localScale = newTreeScreenScale;
+            newTreeScreen.Step = InfoScreenStep.DefineGoal;
+        }
+        else
+        {
+            newTreeScreenScale = newTreeScreen.transform.localScale;
+            newTreeScreen.transform.localScale = Vector3.zero;
+        }
+    }
     public void CreateDummyTree()
     {
         goalSpawner.Spawn();
@@ -119,11 +150,6 @@ public class LTMainMenu : MonoBehaviour
         ((List<int>)dummyData[3]).Add(1);
         ((List<int>)dummyData[3]).Add(2);
 
-        resources.Add("Test Resource");
-        resources.Add("Second One");
-        resources.Add("And a Third");
-        resources.Add("Last One");
-
         goal.Create("Juggling");
         subgoalClubs.Create("Clubs");
         subgoalRings.Create("Rings");
@@ -172,10 +198,7 @@ public class LTMainMenu : MonoBehaviour
             start.GetComponentInChildren<LTSubgoal>().SetExpanded(false);
         }
         RepositionTree();
-    }
-    public void RepositionKeyboard()
-    {
-        keyboard.RepositionKeyboard(CameraCache.Main.transform.position + CameraCache.Main.transform.forward * 1f - CameraCache.Main.transform.up * 0.2f);
+        ChangeGoalMesh();
     }
     public void ChangeGoalMesh()
     {
@@ -183,7 +206,6 @@ public class LTMainMenu : MonoBehaviour
         var mesh = goal.GetComponentInChildren<MeshFilter>();
         mesh.mesh = newMesh;
     }
-
     public void RepositionTree()
     {
         var goal = goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
@@ -191,10 +213,25 @@ public class LTMainMenu : MonoBehaviour
         goal.CalculateLevel(-1);
         goal.RepositionRequirements(repositionMargin);
     }
-
+    public void ShowClanedar()
+    {
+        if (calendar.transform.localScale == Vector3.zero)
+        {
+            calendar.transform.localScale = calendarScale;
+        }
+        else
+        {
+            calendarScale = calendar.transform.localScale;
+            calendar.transform.localScale = Vector3.zero;
+        }
+    }
     public void SwitchEditMode()
     {
-        editMode = !editMode;
+        SwitchEditMode(!editMode);
+    }
+    public void SwitchEditMode(bool value)
+    {
+        editMode = value;
         OnChangeEditMode?.Invoke(editMode);
     }
 
