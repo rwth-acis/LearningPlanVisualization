@@ -11,6 +11,7 @@ public enum LTType { Goal, Subgoal, Action}
 
 abstract public class LTNode : MonoBehaviour
 {
+    public int id;
     public string title;
     public List<LTNode> requirements;
     public LTStatus status=LTStatus.NotAvailable;

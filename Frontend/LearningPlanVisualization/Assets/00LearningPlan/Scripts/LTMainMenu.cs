@@ -21,6 +21,7 @@ public class LTMainMenu : MonoBehaviour
     public Mesh newMesh;
     public float repositionMargin = 0.2f;
 
+    public int maxId=0;
     public List<string> resources = new List<string>();
 
     public delegate void ChangeEditMode(bool editMode);
@@ -64,11 +65,43 @@ public class LTMainMenu : MonoBehaviour
         resources.Add("Teacher");
         resources.Add("Seminar");
         resources.Add("Video");
+        SaveSystem.Init();
 
         ShowClanedar();
         ShowCreateNewTree();
     }
 
+    public void SaveTree(string fileName)
+    {
+        List<LTGoal> goals=new List<LTGoal>();
+        List<LTSubgoal> subgoals = new List<LTSubgoal>();
+        List<LTAction> actions = new List<LTAction>();
+        List<LTCalendar.PlannedEvent> events = new List<LTCalendar.PlannedEvent>();
+
+        SaveObject saveObject = new SaveObject { goals = goals,subgoals=subgoals,actions=actions,events=events};
+        string saveString = "emptyTestString";
+        SaveSystem.Save(fileName, saveString);
+    }
+
+    public void LoadTree(string fileName)
+    {
+        string saveString = SaveSystem.Load(fileName);
+        if (saveString == null) print("File not Found");
+        else
+        {
+            print(saveString);
+        }
+    }
+
+    public string saveObjectToSaveString(SaveObject saveObject)
+    {
+        return null;
+    }
+
+    public SaveObject saveStringTosaveObject(string savestring)
+    {
+        return null;
+    }
 
     public void RepositionKeyboard()
     {
