@@ -84,7 +84,8 @@ public class LTCalendar : MonoBehaviour
                 week[i].GetComponent<Interactable>().OnClick.AddListener(delegate { DayCLicked(counter); });
             }
         }
-        UpdateCalendar(DateTime.Now.Year, DateTime.Now.Month);
+        currDate = DateTime.Now;
+        RefreshCalendar();
     }
 
 
@@ -174,6 +175,11 @@ public class LTCalendar : MonoBehaviour
 
     }
 
+    public void RefreshCalendar()
+    {
+        UpdateCalendar(currDate.Year, currDate.Month);
+    }
+
     /// <summary>
     /// This returns which day of the week the month is starting on
     /// </summary>
@@ -207,22 +213,22 @@ public class LTCalendar : MonoBehaviour
         {
             currDate = currDate.AddMonths(1);
         }
-
-        UpdateCalendar(currDate.Year, currDate.Month);
+        RefreshCalendar();
     }
 
     public void AddEvent(LTAction action, DateTime startDate)
     {
         PlannedEvent temp = new PlannedEvent(action, startDate);
-        plannedEvents.RemoveAll(x => x.GetAction().name == action.name);
+        RemoveEvent(action);
         plannedEvents.Add(temp);
         action.calendarStatus = LTStatus.Done;
-        UpdateCalendar(currDate.Year, currDate.Month);
+        RefreshCalendar();
     }
 
-    public void AddDummyEvent(DateTime dateTime)
+    public void RemoveEvent(LTAction action)
     {
-        AddEvent(LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>(), dateTime);
+        plannedEvents.RemoveAll(x => x.GetAction().name == action.name);
+        RefreshCalendar();
     }
 
     public void DayCLicked(int id)

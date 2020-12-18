@@ -195,7 +195,7 @@ abstract public class LTNode : MonoBehaviour
         Destroy(self);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         LTMainMenu.instance.OnChangeEditMode -= HandleChangeEditMode;
 

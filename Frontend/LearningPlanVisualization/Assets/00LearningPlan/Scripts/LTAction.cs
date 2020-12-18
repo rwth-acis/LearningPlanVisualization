@@ -118,6 +118,7 @@ public class LTAction : LTNode
                 {
                     time = new TimeSpan(x, 0, 0, 0);
                 }
+                LTMainMenu.instance.calendar.RemoveEvent(this);
                 break;
             default:
                 break;
@@ -189,4 +190,10 @@ public class LTAction : LTNode
     {
         addToCalendarSphere.SetActive(false);
     }
+    protected override void OnDestroy()
+    {
+        LTMainMenu.instance.calendar.RemoveEvent(this);
+        base.OnDestroy();
+    }
+
 }
