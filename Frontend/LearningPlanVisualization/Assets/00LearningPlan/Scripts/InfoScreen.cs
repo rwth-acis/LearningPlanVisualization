@@ -97,7 +97,7 @@ public class InfoScreen : MonoBehaviour
             case InfoScreenStep.DefineSubgoals:
                 LTMainMenu.instance.subgoalSpawner.Spawn();
                 var subgoal = LTMainMenu.instance.subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
-                subgoal.Create(input.text, GetSpawnPosition());
+                subgoal.Create(input.text, GetSpawnPosition(), LTMainMenu.instance.goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>());
                 break;
             case InfoScreenStep.PlaceSubgoals:
                 break;

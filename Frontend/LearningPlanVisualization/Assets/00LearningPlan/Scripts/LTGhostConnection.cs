@@ -58,23 +58,27 @@ public class LTGhostConnection : MonoBehaviour
             case LTType.Subgoal:
                 LTMainMenu.instance.subgoalSpawner.Spawn();
                 var subgoal = LTMainMenu.instance.subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
-                subgoal.Create("Set Name", end.transform.position);
+                if (start.GetType() == typeof(LTSubgoal))
+                {
+                    subgoal.Create("Set Name", end.transform.position, (start as LTSubgoal).group);
+                }
+                else
+                {
+                    subgoal.Create("Set Name", end.transform.position, start as LTGoal);
+                }
                 //Create Connection
                 LTMainMenu.instance.NewConnection(start, subgoal);
                 break;
             case LTType.Action:
                 LTMainMenu.instance.actionSpawner.Spawn();
-                var actionGameObject = LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject;
-                var action = actionGameObject.GetComponentInChildren<LTAction>();
+                var action = LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
                 if(start.GetType() == typeof(LTAction))
                 {
                     action.Create("Set Name", end.transform.position, (start as LTAction).group);
-                    actionGameObject.transform.SetParent(start.transform.parent.parent);
                 }
                 else
                 {
                     action.Create("Set Name", end.transform.position, start as LTSubgoal);
-                    actionGameObject.transform.SetParent(start.transform.parent);
                 }
                 //Create Connection
                 LTMainMenu.instance.NewConnection(start, action);

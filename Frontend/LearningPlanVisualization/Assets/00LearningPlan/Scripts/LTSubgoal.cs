@@ -6,11 +6,18 @@ public class LTSubgoal : LTNode
 {
     public int neededActions { get; private set; }
     public int doneActions { get; private set; }
+    public LTGoal group;
 
     public override void NodeClicked()
     {
         base.NodeClicked();
         SetExpanded(!visibility.RequirementsVisible);
+    }
+
+    public void Create(string newTitle,Vector3 newPosition, LTGoal newGroup)
+    {
+        Create(newTitle, newPosition);
+        group = newGroup;
     }
 
     override public void RepositionRequirements(float margin)

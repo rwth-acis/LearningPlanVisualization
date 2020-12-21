@@ -35,7 +35,7 @@ public class LTCalendar : MonoBehaviour
         }
     }
 
-    List<PlannedEvent> plannedEvents = new List<PlannedEvent>();
+    public List<PlannedEvent> plannedEvents = new List<PlannedEvent>();
 
 
     /// <summary>
@@ -228,6 +228,12 @@ public class LTCalendar : MonoBehaviour
     public void RemoveEvent(LTAction action)
     {
         plannedEvents.RemoveAll(x => x.GetAction().name == action.name);
+        RefreshCalendar();
+    }
+
+    public void ClearEvents()
+    {
+        plannedEvents.Clear();
         RefreshCalendar();
     }
 

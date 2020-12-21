@@ -33,12 +33,12 @@ public class CreateConnection : MonoBehaviour
 
         if (node.GetType() == typeof(LTGoal))
         {
-            if (selfNode.GetType() == typeof(LTSubgoal))
+            if (selfNode.GetType() == typeof(LTSubgoal) && (selfNode as LTSubgoal).group ==node)
                 possibleConnection = true;
         }
         else if (node.GetType() == typeof(LTSubgoal))
         {
-            if (selfNode.GetType() == typeof(LTSubgoal))
+            if (selfNode.GetType() == typeof(LTSubgoal)&&(selfNode as LTSubgoal).group==(node as LTSubgoal).group)
                 possibleConnection = true;
             else if (selfNode.GetType() == typeof(LTAction) && (selfNode as LTAction).group==node)
                 possibleConnection = true;

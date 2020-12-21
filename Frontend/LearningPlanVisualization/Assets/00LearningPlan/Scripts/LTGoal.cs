@@ -46,7 +46,8 @@ public class LTGoal : LTNode
     {
         foreach (var item in LTMainMenu.instance.subgoalSpawner.SpawnedInstances)
         {
-            item.GetComponentInChildren<LTSubgoal>().Delete();
+            if(item.GetComponentInChildren<LTSubgoal>().group==this)
+                item.GetComponentInChildren<LTSubgoal>().Delete();
         }
         base.Delete();
     }

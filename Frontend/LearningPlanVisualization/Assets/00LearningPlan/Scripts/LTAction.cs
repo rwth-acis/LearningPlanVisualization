@@ -73,6 +73,7 @@ public class LTAction : LTNode
     {
         Create(newTitle, newPosition);
         group = newGroup;
+        transform.parent.gameObject.transform.SetParent(group.transform.parent.gameObject.transform);
         done = newDone;
         foreach(var resource in newResources)
         {

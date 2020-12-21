@@ -40,6 +40,8 @@ abstract public class LTNode : MonoBehaviour
         addToCalendarSphere.SetActive(false);
         visualizer = GetComponent<LTNodeVisualizer>();
         visibility = GetComponent<Visibility>();
+        id = LTMainMenu.instance.nextId;
+        LTMainMenu.instance.nextId++;
     }
 
     virtual public void HandleChangeEditMode(bool editMode)
