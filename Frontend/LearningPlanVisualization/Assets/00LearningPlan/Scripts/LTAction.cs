@@ -10,6 +10,7 @@ public class LTAction : LTNode
     public string evidence;
     public TimeSpan time = TimeSpan.Zero;
     public LTSubgoal group;
+    public EditResourcesBtn ResourcesBtn;
 
     override public void BtnDoneClicked()
     {
@@ -41,8 +42,10 @@ public class LTAction : LTNode
     public void ToggleResource(int id)
     {
         if (id == 0) return;
-        if (resources.Contains(id)) resources.Remove(id);
+        if (id == 1) ResourcesBtn.ShowKeyboard();
+        else if (resources.Contains(id)) resources.Remove(id);
         else resources.Add(id);
+
         visualizer.UpdateContense();
     }
 

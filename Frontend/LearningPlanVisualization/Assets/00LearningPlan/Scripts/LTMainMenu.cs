@@ -60,6 +60,7 @@ public class LTMainMenu : MonoBehaviour
         OnChangeEditMode?.Invoke(editMode);
         connections = new GameObject("Connections");
         resources.Add("Toggle Resource");
+        resources.Add("New Resource...");
         //Dummyresources
         resources.Add("Book");
         resources.Add("Teacher");
@@ -234,7 +235,7 @@ public class LTMainMenu : MonoBehaviour
 
         object[] dummyData = { Vector3.zero, subgoalBalls, false, new List<int>(), "Juggle 2 minutes without a flaw", new TimeSpan(2, 0, 0, 0) };
         ((List<int>)dummyData[3]).Add(3);
-        ((List<int>)dummyData[3]).Add(1);
+        ((List<int>)dummyData[3]).Add(4);
         ((List<int>)dummyData[3]).Add(2);
 
         goal.Create("Juggling");

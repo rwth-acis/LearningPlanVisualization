@@ -3479,6 +3479,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3336513913165518637, guid: df7561df267703d42983a036d8ce85ab,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5481825534055182769, guid: df7561df267703d42983a036d8ce85ab,
         type: 3}
       propertyPath: m_textInfo.characterCount
