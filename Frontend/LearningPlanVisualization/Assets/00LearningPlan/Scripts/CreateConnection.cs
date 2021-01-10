@@ -19,6 +19,7 @@ public class CreateConnection : MonoBehaviour
     void Start()
     {
         LTMainMenu.instance.OnCreateConnection += HandleCreateConnection;
+        LTMainMenu.instance.OnChangeEditMode += HandleChangeEditMode;
         selfNode = GetComponent<LTNode>();
         //halo = (Behaviour)GetComponent("Halo");
         //halo.enabled = false;
@@ -82,25 +83,22 @@ public class CreateConnection : MonoBehaviour
         {
 
             createConnectionSphere.SetActive(true);
- //           InvokeRepeating("Blink", 0, 0.5f);
         }
     }
-
+    private void HandleChangeEditMode(bool value)
+    {
+        EndConnecting();
+    }
     private void EndConnecting()
     {
         startNode = null;
         creating = false;
         createConnectionSphere.SetActive(false);
- //       CancelInvoke("Blink");
- //       haloVisible = false;
- //       halo.enabled = false;
+    }
+    private void OnDestroy()
+    {
+        LTMainMenu.instance.OnCreateConnection -= HandleCreateConnection;
+        LTMainMenu.instance.OnChangeEditMode -= HandleChangeEditMode;
     }
 
-/*
-    void Blink()
-    {
-        haloVisible = !haloVisible;
-        halo.enabled = haloVisible;
-    }
-    */
 }

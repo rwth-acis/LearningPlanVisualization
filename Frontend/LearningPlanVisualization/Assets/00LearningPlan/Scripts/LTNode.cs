@@ -96,7 +96,19 @@ abstract public class LTNode : MonoBehaviour
 
     virtual public void EditText(LTEditText.EditType editType, string text)
     {
-
+        switch (editType)
+        {
+            case LTEditText.EditType.Title:
+                title = text;
+                break;
+            case LTEditText.EditType.Evidence:
+                break;
+            case LTEditText.EditType.Time:
+                break;
+            default:
+                break;
+        }
+        visualizer.UpdateContense();
     }
 
     virtual public void BtnDoneClicked()

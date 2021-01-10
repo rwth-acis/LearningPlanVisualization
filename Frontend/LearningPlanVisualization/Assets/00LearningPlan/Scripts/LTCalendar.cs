@@ -91,11 +91,16 @@ public class LTCalendar : MonoBehaviour
 
     void UpdateCalendarStatusOfNodes()
     {
-        foreach(var spawner in LTMainMenu.instance.nodeSpawner)
-            foreach(var instance in spawner.SpawnedInstances)
+        for (int i = 0; i < LTMainMenu.instance.subgoalSpawner.SpawnedInstances.Length; i++)
+        {
+            foreach (var spawner in LTMainMenu.instance.nodeSpawner)
             {
-                instance.GetComponentInChildren<LTNode>().UpdateCalendarStatus();
+                foreach (var instance in spawner.SpawnedInstances)
+                {
+                    instance.GetComponentInChildren<LTNode>().UpdateCalendarStatus();
+                }
             }
+        }
     }
 
     void ResetCalendarStatusOfNodes()
@@ -227,7 +232,7 @@ public class LTCalendar : MonoBehaviour
 
     public void RemoveEvent(LTAction action)
     {
-        plannedEvents.RemoveAll(x => x.GetAction().name == action.name);
+        plannedEvents.RemoveAll(x => x.GetAction().id == action.id);
         RefreshCalendar();
     }
 

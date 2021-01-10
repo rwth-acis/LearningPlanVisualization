@@ -59,6 +59,18 @@ public class LTMainMenu : MonoBehaviour
     {
         OnChangeEditMode?.Invoke(editMode);
         connections = new GameObject("Connections");
+        ResetResources();
+        SaveSystem.Init();
+
+        //print(SaveSystem.SAVE_FOLDER);
+
+        ShowClanedar();
+        ShowCreateNewTree();
+    }
+    private void ResetResources()
+    {
+
+        resources.Clear();
         resources.Add("Toggle Resource");
         resources.Add("New Resource...");
         //Dummyresources
@@ -66,12 +78,6 @@ public class LTMainMenu : MonoBehaviour
         resources.Add("Teacher");
         resources.Add("Seminar");
         resources.Add("Video");
-        SaveSystem.Init();
-
-        //print(SaveSystem.SAVE_FOLDER);
-
-        ShowClanedar();
-        ShowCreateNewTree();
     }
 
     public void SaveTree(string fileName)
@@ -164,13 +170,15 @@ public class LTMainMenu : MonoBehaviour
         {
             goal.GetComponentInChildren<LTGoal>().Delete();
         }
-        resources.Clear();
+        ResetResources();
         nextId = 0;
     }
     
     public void RepositionKeyboard()
     {
-        keyboard.RepositionKeyboard(CameraCache.Main.transform.position + CameraCache.Main.transform.forward * 1f - CameraCache.Main.transform.up * 0.2f);
+
+        keyboard.Close();
+        keyboard.RepositionKeyboard(CameraCache.Main.transform.position + CameraCache.Main.transform.forward * 1.5f - CameraCache.Main.transform.up * 0.2f);
     }
 
     public void ShowCreateNewTree()

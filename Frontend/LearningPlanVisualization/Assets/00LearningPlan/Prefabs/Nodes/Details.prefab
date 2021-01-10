@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 2239503755328415070}
   - component: {fileID: 4270836785973461872}
   - component: {fileID: 4073893420330027918}
+  - component: {fileID: 1106833093340611072}
   m_Layer: 0
   m_Name: BtnDone
   m_TagString: Untagged
@@ -810,6 +811,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectNode: {fileID: 0}
+--- !u!114 &1106833093340611072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2153225544897228227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f0a8eacdfb65449bf882a80d368273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factor: 2
 --- !u!1 &2992416904358019808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,6 +1754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourcesCanvas: {fileID: 8569923662545814919}
+  visualizer: {fileID: 0}
 --- !u!1 &5574506208310005812
 GameObject:
   m_ObjectHideFlags: 0

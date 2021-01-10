@@ -69,7 +69,7 @@ public class LTAction : LTNode
     }
     public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup)
     {
-        Create(newTitle, newPosition, newGroup, false, new List<int>(), "", new TimeSpan());
+        Create(newTitle, newPosition, newGroup, false, new List<int>(), "", new TimeSpan(1,0,0,0));
     }
 
     public void Create(string newTitle, Vector3 newPosition, LTSubgoal newGroup, bool newDone, List<int> newResources, string newEvidence, TimeSpan newTime)

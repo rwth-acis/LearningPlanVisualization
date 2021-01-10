@@ -98,6 +98,7 @@ public class InfoScreen : MonoBehaviour
                 LTMainMenu.instance.subgoalSpawner.Spawn();
                 var subgoal = LTMainMenu.instance.subgoalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTSubgoal>();
                 subgoal.Create(input.text, GetSpawnPosition(), LTMainMenu.instance.goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>());
+                input.text = "";
                 break;
             case InfoScreenStep.PlaceSubgoals:
                 break;
@@ -105,6 +106,7 @@ public class InfoScreen : MonoBehaviour
                 LTMainMenu.instance.actionSpawner.Spawn();
                 var action = LTMainMenu.instance.actionSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTAction>();
                 action.Create(input.text, GetSpawnPosition(), LTMainMenu.instance.subgoalSpawner.SpawnedInstances[activeSubgoal].GetComponentInChildren<LTSubgoal>());
+                input.text = "";
                 break;
             case InfoScreenStep.PlaceActions:
                 break;
@@ -125,11 +127,12 @@ public class InfoScreen : MonoBehaviour
                 LTMainMenu.instance.goalSpawner.Spawn();
                 var goal = LTMainMenu.instance.goalSpawner.MostRecentlySpawnedObject.GetComponentInChildren<LTGoal>();
                 goal.Create(input.text, GetSpawnPosition());
+                LTMainMenu.instance.ChangeGoalMesh();
                 break;
             case InfoScreenStep.DefineSubgoals:
+                if (LTMainMenu.instance.subgoalSpawner.SpawnedInstances.Length == 0) return;
                 break;
             case InfoScreenStep.PlaceSubgoals:
-                if (LTMainMenu.instance.subgoalSpawner.SpawnedInstances.Length == 0) return;
                 break;
             case InfoScreenStep.SpecifySubgoal:
                 break;
@@ -141,6 +144,7 @@ public class InfoScreen : MonoBehaviour
                     activeSubgoal = 0;
                 break;
             case InfoScreenStep.SpecifyActions:
+                LTMainMenu.instance.ShowCreateNewTree();
                 break;
             default:
                 break;
@@ -152,7 +156,7 @@ public class InfoScreen : MonoBehaviour
 
     Vector3 GetSpawnPosition()
     {
-        return cam.transform.position + cam.transform.forward * 1;
+        return cam.transform.position + cam.transform.forward * 2 - cam.transform.up * 0.1f;
     }
     void setDefineGoalText()
     {

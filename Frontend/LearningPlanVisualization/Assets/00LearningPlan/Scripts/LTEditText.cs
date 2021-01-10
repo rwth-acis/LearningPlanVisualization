@@ -23,14 +23,21 @@ public class LTEditText : MonoBehaviour, IMixedRealityPointerHandler
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
         LTMainMenu.instance.RepositionKeyboard();
-        if (editType == EditType.Time)
+        switch (editType)
         {
-            keyboard.PresentKeyboard(textField.text.Substring(0, textField.text.IndexOf(" ")),NonNativeKeyboard.LayoutType.Symbol);
+            case EditType.Title:
+                keyboard.PresentKeyboard(node.title);
+                break;
+            case EditType.Evidence:
+                keyboard.PresentKeyboard((node as LTAction).evidence);
+                break;
+            case EditType.Time:
+                keyboard.PresentKeyboard((node as LTAction).time.Days.ToString(), NonNativeKeyboard.LayoutType.Symbol);
+                break;
+            default:
+                break;
         }
-        else
-        {
-            keyboard.PresentKeyboard(textField.text);
-        }
+        keyboard.InputField.MoveToEndOfLine(true, false);
         
         keyboard.OnClosed += DisableKeyboard;
         keyboard.OnTextSubmitted += DisableKeyboard;
@@ -48,8 +55,8 @@ public class LTEditText : MonoBehaviour, IMixedRealityPointerHandler
         keyboard.OnClosed -= DisableKeyboard;
         keyboard.OnTextSubmitted -= DisableKeyboard;
 
+        node.EditText(editType, (sender as NonNativeKeyboard).InputField.text);
         keyboard.Close();
-        node.EditText(editType, textField.text);
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
