@@ -164,7 +164,7 @@ public class LTCalendar : MonoBehaviour
             {
                 if (tempDate.Year == firstOfMonth.Year && tempDate.Month == firstOfMonth.Month)
                 {
-                    days[tempDate.Day - 1 + startDay].UpdatePlannedEvent(plannedEvent.GetAction().name);
+                    days[tempDate.Day - 1 + startDay].UpdatePlannedEvent(plannedEvent.GetAction().title);
                 }
                 tempDate = tempDate.AddDays(1);
             }
