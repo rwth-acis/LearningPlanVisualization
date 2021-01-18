@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// connection between two ndoes
+/// </summary>
 public class LTConnection : MonoBehaviour
 {
     public LTNode start;
@@ -17,7 +21,7 @@ public class LTConnection : MonoBehaviour
     private Vector3 storedLocalScale = Vector3.one;
 
 
-    // Start is called before the first frame update
+    // Create is called to Init connection
     public void Create(LTNode newStart, LTNode newEnd)
     {
         start = newStart;
@@ -42,6 +46,9 @@ public class LTConnection : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called on position change of one of the nodes to adapt position size and texturescale
+    /// </summary>
     void HandleChangePosition()
     {
         startPosition = start.transform.position;
@@ -53,6 +60,9 @@ public class LTConnection : MonoBehaviour
         cylinder.transform.localScale = new Vector3(1, length,1);
     }
 
+    /// <summary>
+    /// check if both nodes are visibility
+    /// </summary>
     void Update()
     {
         if (startVisibility.Visible && endVisibility.Visible)

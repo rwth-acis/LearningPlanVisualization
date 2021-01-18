@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// On button Click delete Node
+/// </summary>
 public class DeleteNodeBtn : MonoBehaviour, IMixedRealityPointerHandler
 {
     public GameObject gameObjectNode;

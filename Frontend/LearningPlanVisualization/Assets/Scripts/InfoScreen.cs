@@ -4,11 +4,19 @@ using UnityEngine;
 using TMPro;
 
 public enum InfoScreenStep { DefineGoal, DefineSubgoals, PlaceSubgoals, SpecifySubgoal, PlaceActions, SpecifyActions }
+
+/// <summary>
+/// Information screen, visible while creating a new tree
+/// </summary>
 public class InfoScreen : MonoBehaviour
 {
     public TextMeshPro text;
     public Camera cam;
     private InfoScreenStep step;
+
+    /// <summary>
+    /// refference on current creation step
+    /// </summary>
     public InfoScreenStep Step
     {
         get { return step; }
@@ -41,6 +49,11 @@ public class InfoScreen : MonoBehaviour
         Step = InfoScreenStep.DefineGoal;
     }
 
+
+    /// <summary>
+    /// set visibilty for buttons and set text if next step is active
+    /// </summary>
+    /// <param name="newStep"></param>
     private void HandleChangeInfosScreenStep(InfoScreenStep newStep)
     {
         //clear input field
@@ -87,6 +100,9 @@ public class InfoScreen : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// define functionBTN for every step
+    /// </summary>
     public void BtnFunctionClicked()
     {
         if (placeholder.enabled) return;
@@ -117,6 +133,9 @@ public class InfoScreen : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// define nextbutton for every step
+    /// </summary>
     public void BtnNextClicked()
     {
         int nextStep = (int)Step;

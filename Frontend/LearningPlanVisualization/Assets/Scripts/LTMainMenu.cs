@@ -7,6 +7,10 @@ using Microsoft.MixedReality.Toolkit.Experimental.UI;
 using Microsoft.MixedReality.Toolkit.Utilities;
 
 public enum LTModes { Normal, CreateConnection, CreateGhost, AddToCalendar }
+
+/// <summary>
+/// The main menu is the reference for all important parts of the application
+/// </summary>
 public class LTMainMenu : MonoBehaviour
 {
     public static LTMainMenu instance;
@@ -55,18 +59,22 @@ public class LTMainMenu : MonoBehaviour
         editMode = false;
     }
 
+    /// <summary>
+    /// Inint Scene
+    /// </summary>
     private void Start()
     {
         OnChangeEditMode?.Invoke(editMode);
         connections = new GameObject("Connections");
         ResetResources();
         SaveSystem.Init();
-
-        //print(SaveSystem.SAVE_FOLDER);
-
         ShowClanedar();
         ShowCreateNewTree();
     }
+
+    /// <summary>
+    /// reset list of resources to dummy list (for new trees)
+    /// </summary>
     private void ResetResources()
     {
 
@@ -80,6 +88,11 @@ public class LTMainMenu : MonoBehaviour
         resources.Add("Video");
     }
 
+    /// <summary>
+    /// create saveobject and add all imprtant parts in the scene
+    /// afterwards convert to json and save
+    /// </summary>
+    /// <param name="fileName">save file name</param>
     public void SaveTree(string fileName)
     {
         SaveObject saveObject = new SaveObject() { resources = resources };
@@ -95,11 +108,24 @@ public class LTMainMenu : MonoBehaviour
         string saveString = JsonUtility.ToJson(saveObject);
         SaveSystem.Save(fileName, saveString);
     }
+
+
     public void SaveButtonClicked()
     {
         SaveTree("save.txt");
     }
 
+
+    /// <summary>
+    /// if there exists a tree delete it, otherwise load "FileNme"
+    /// 
+    /// create goals from saveobject
+    /// create subgoals from saveobject
+    /// create actions from saveobject
+    /// create connections between nodes
+    /// fill calendar with events
+    /// </summary>
+    /// <param name="fileName">load file name</param>
     public void LoadTree(string fileName)
     {
         if (goalSpawner.SpawnedInstances.Length!=0)
@@ -162,6 +188,9 @@ public class LTMainMenu : MonoBehaviour
         LoadTree("save.txt");
     }
 
+    /// <summary>
+    /// delete current tree by deleting the goalnode
+    /// </summary>
     public void DeleteTree()
     {
         calendar.ClearEvents();
@@ -174,13 +203,20 @@ public class LTMainMenu : MonoBehaviour
         nextId = 0;
     }
     
+    /// <summary>
+    /// called before keyboard is made visible.
+    /// positiones keyboard infront of the user slightly below line of sight
+    /// </summary>
     public void RepositionKeyboard()
     {
-
         keyboard.Close();
         keyboard.RepositionKeyboard(CameraCache.Main.transform.position + CameraCache.Main.transform.forward * 1.5f - CameraCache.Main.transform.up * 0.2f);
     }
 
+
+    /// <summary>
+    /// show the window that guides the user through the creation of a new tree
+    /// </summary>
     public void ShowCreateNewTree()
     {
         if (newTreeScreen.transform.localScale == Vector3.zero)
@@ -196,6 +232,11 @@ public class LTMainMenu : MonoBehaviour
             newTreeScreen.transform.localScale = Vector3.zero;
         }
     }
+
+
+    /// <summary>
+    /// create dummy tree to test stuff. isnt called in the scene anymore
+    /// </summary>
     public void CreateDummyTree()
     {
         goalSpawner.Spawn();
@@ -296,11 +337,20 @@ public class LTMainMenu : MonoBehaviour
         RepositionTree();
         ChangeGoalMesh();
     }
+
+    /// <summary>
+    /// change goalmesh to sth more visible
+    /// </summary>
     public void ChangeGoalMesh()
     {
         foreach( var goal in goalSpawner.SpawnedInstances)
             goal.GetComponentInChildren<MeshFilter>().mesh=newMesh;
     }
+
+    /// <summary>
+    /// start the automatic repositioning of the tree.
+    /// anchor point is the goal
+    /// </summary>
     public void RepositionTree()
     {
         foreach(var node in goalSpawner.SpawnedInstances)
@@ -311,6 +361,10 @@ public class LTMainMenu : MonoBehaviour
             goal.RepositionRequirements(repositionMargin);
         }
     }
+
+    /// <summary>
+    /// show/hide calendar
+    /// </summary>
     public void ShowClanedar()
     {
         if (calendar.transform.localScale == Vector3.zero)
@@ -323,15 +377,25 @@ public class LTMainMenu : MonoBehaviour
             calendar.transform.localScale = Vector3.zero;
         }
     }
+
+    /// <summary>
+    /// switch to/from edit mode
+    /// </summary>
     public void SwitchEditMode()
     {
         SwitchEditMode(!editMode);
     }
+
+    /// <summary>
+    /// turn edit mode to "value"
+    /// </summary>
+    /// <param name="value">edit mode (on/off)</param>
     public void SwitchEditMode(bool value)
     {
         editMode = value;
         OnChangeEditMode?.Invoke(editMode);
     }
+
 
     public void SwitchMode(LTModes newMode)
     {
@@ -349,6 +413,11 @@ public class LTMainMenu : MonoBehaviour
         OnDestroyGhosts?.Invoke();
     }
     
+    /// <summary>
+    /// create connection from startnode to endnode
+    /// </summary>
+    /// <param name="startnode"></param>
+    /// <param name="endnode"></param>
     public void NewConnection(LTNode startnode, LTNode endnode)
     {
         if(startnode && endnode)
@@ -361,11 +430,22 @@ public class LTMainMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  create connections between ndoes by Ids
+    /// </summary>
+    /// <param name="startNodeID"></param>
+    /// <param name="endNodeID"></param>
     public void NewConnection(int startNodeID, int endNodeID)
     {
         NewConnection(GetNodeByID(startNodeID), GetNodeByID(endNodeID));
     }
 
+    /// <summary>
+    /// check if two nodes are connected in any direction
+    /// </summary>
+    /// <param name="firstNode"></param>
+    /// <param name="secondNode"></param>
+    /// <returns></returns>
     public bool AreConnected(LTNode firstNode, LTNode secondNode)
     {
         if (AreConnectedInOrder(firstNode, secondNode)) return true;
@@ -373,6 +453,12 @@ public class LTMainMenu : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// check if "endnode" is requirement of "startnode"
+    /// </summary>
+    /// <param name="startnode"></param>
+    /// <param name="endnode"></param>
+    /// <returns></returns>
     private bool AreConnectedInOrder(LTNode startnode, LTNode endnode)
     {
         foreach (var requirement in startnode.requirements)
@@ -382,6 +468,12 @@ public class LTMainMenu : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// search for node by id
+    /// return null if not existing
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public LTNode GetNodeByID(int id)
     {
         LTNode node;
@@ -393,6 +485,7 @@ public class LTMainMenu : MonoBehaviour
         if (node != default(LTNode)) return node;
         return null;
     }
+
     IEnumerator WaitFrame()
     {
         yield return null;

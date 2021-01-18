@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// open resource dropdown and if needed open keyboard
+/// </summary>
 public class EditResourcesBtn : MonoBehaviour, IMixedRealityPointerHandler
 {
     public GameObject resourcesCanvas;

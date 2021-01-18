@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// enlarge plate on focus enter and revert on exit
+/// </summary>
 public class EnlargeOnFocus : MonoBehaviour, IMixedRealityFocusHandler
 {
     public float factor = 2.0f;
