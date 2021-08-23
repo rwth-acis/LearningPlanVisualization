@@ -104,7 +104,6 @@ PlayerSettings:
   xboxOneMonoLoggingLevel: 0
   xboxOneLoggingLevel: 1
   xboxOneDisableEsram: 0
-  xboxOneEnableTypeOptimization: 0
   xboxOnePresentImmediateThreshold: 0
   switchQueueCommandMemory: 1048576
   switchQueueControlMemory: 16384
@@ -540,11 +539,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: LearningPlanVisualization
   metroPackageVersion: 0.1.0.0
-  metroCertificatePath: Assets\WSATestCertificate.pfx
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: i5
   metroCertificateIssuer: i5
-  metroCertificateNotAfter: 808d9bf9e319d601
+  metroCertificateNotAfter: 8096fec100b7d801
   metroApplicationDescription: LearningPlanVisualization
   wsaImages: {}
   metroTileShortName: LearningPlanVisualization
